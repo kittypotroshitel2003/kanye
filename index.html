@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KANYE — Beauty Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700&family=Oranienbaum&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <a href="#hero" aria-label="KANYE — на главную">
+      <img class="nav__logo" src="assets/images/logo-nav.svg" alt="KANYE" width="161" height="21" />
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a class="nav__link" href="#услуги">услуги</a></li>
+      <li><a class="nav__link" href="#о-салоне">о салоне</a></li>
+      <li><a class="nav__link" href="#команда">команда</a></li>
+      <li><a class="nav__link" href="#контакты">контакты</a></li>
+    </ul>
+    <button class="nav__cta" type="button" id="navBookingBtn">записаться</button>
+    <button class="nav__hamburger" aria-label="Открыть меню" type="button">
+      <img src="assets/images/menu-icon.svg" alt="" aria-hidden="true" width="19" height="14" />
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Меню" aria-hidden="true">
+    <button class="mobile-menu__close" id="mobileMenuClose" aria-label="Закрыть меню">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6l12 12" stroke="#FF5D00" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <nav aria-label="Основная навигация">
+      <ul class="mobile-menu__links" role="list">
+        <li><a class="mobile-menu__link" href="#услуги">услуги</a></li>
+        <li><a class="mobile-menu__link" href="#о-салоне">о салоне</a></li>
+        <li><a class="mobile-menu__link" href="#команда">команда</a></li>
+        <li><a class="mobile-menu__link" href="#контакты">контакты</a></li>
+      </ul>
+      <button class="mobile-menu__cta" type="button" id="mobileMenuBookingBtn">записаться</button>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero" aria-label="Главная">
+    <svg class="hero__logo" viewBox="0 0 1201 162" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="KANYE" overflow="visible">
+      <defs>
+        <linearGradient id="kanye-shine" x1="-700" y1="0" x2="0" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%"   stop-color="#FF5D00"/>
+          <stop offset="25%"  stop-color="#FF5D00"/>
+          <stop offset="38%"  stop-color="#B03200"/>
+          <stop offset="47%"  stop-color="#FF6A10"/>
+          <stop offset="54%"  stop-color="#FFE8D8"/>
+          <stop offset="60%"  stop-color="#FF6A10"/>
+          <stop offset="72%"  stop-color="#FF5D00"/>
+          <stop offset="100%" stop-color="#FF5D00"/>
+        </linearGradient>
+      </defs>
+      <!-- K -->
+      <path d="M0.453158 0.892651L93.1018 0.877013L93.0828 39.8517C100.496 26.9165 107.82 13.9298 115.053 0.892405C153.159 0.378939 193.332 0.724972 231.46 0.918595L169.836 73.5012C180.187 89.67 193.996 108.486 205.108 124.528C211.866 133.1 224.223 152.1 230.842 161.662L115.972 161.692C108.425 149.472 100.789 137.306 93.0663 125.196L93.103 161.644L0.470732 161.651L0.453158 0.892651Z" fill="url(#kanye-shine)"/>
+      <!-- A -->
+      <path d="M304.14 0.872473L423.45 0.847449C431.258 16.8797 440.652 40.6319 447.933 57.6243L492.407 161.647L406.881 161.65L395.475 161.654L390.336 145.152L336.703 145.16L331.546 161.646L234.706 161.651C256.688 108.432 281.337 54.0181 304.14 0.872473Z" fill="url(#kanye-shine)"/>
+      <path d="M363.329 62.8142C365.13 64.989 371.692 87.2885 372.922 91.3186L365.16 91.3364L354.076 91.3536L363.329 62.8142Z" fill="#F6F4F0"/>
+      <!-- N -->
+      <path d="M495.553 0.891178C535.318 0.430395 575.93 0.853397 615.768 0.848614C624.237 14.5666 632.859 28.1891 641.634 41.7137L641.604 0.895595C672.271 0.561768 703.674 0.858489 734.391 0.854502L734.421 114.088L734.44 144.947C734.446 149.139 734.691 158.105 734.078 161.65L614.586 161.657C606.27 149.57 596.631 133.171 588.578 120.499C588.339 134.016 588.529 148.086 588.523 161.646L495.564 161.654L495.553 0.891178Z" fill="url(#kanye-shine)"/>
+      <!-- Y -->
+      <path d="M738.267 0.897312L852.064 0.852111L873.534 24.5595L894.337 0.919328C930.791 0.00739075 971.336 0.764344 1008.11 0.913563L942.034 73.595C934.637 81.7153 926.952 89.9761 919.775 98.257V161.647L826.81 161.649L826.798 98.4165C819.713 89.4854 806.118 75.4632 798.139 66.6928L738.267 0.897312Z" fill="url(#kanye-shine)"/>
+      <!-- E -->
+      <path d="M1011.84 0.881675L1200.71 0.86027L1200.71 49.4489L1099.75 49.4476L1099.78 57.1748L1200.73 57.1582L1200.71 105.435L1144.79 105.425L1099.81 105.422L1099.76 113.097L1200.72 113.088L1200.71 161.646L1011.89 161.651L1011.84 0.881675Z" fill="url(#kanye-shine)"/>
+    </svg>
+    <img class="hero__fg" src="assets/images/hero-woman-fg.png" alt="" aria-hidden="true" />
+    <img class="hero__strip" src="assets/images/text-strip.svg" alt="" aria-hidden="true" width="1469" height="84" />
+    <button class="hero__mobile-cta" type="button" id="heroBookingBtn">записаться</button>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="услуги" aria-labelledby="services-heading">
+    <h2 class="section-heading services__heading reveal" id="services-heading">УСЛУГИ</h2>
+    <div class="services__grid">
+
+      <a class="service-card reveal" style="--reveal-delay:0ms" href="services/hair.html">
+        <img class="service-card__img" src="assets/images/service-hair.jpg" alt="Уход и стрижка волос" />
+        <div class="service-card__overlay" aria-hidden="true"></div>
+        <span class="service-card__label">волосы</span>
+      </a>
+
+      <a class="service-card reveal" style="--reveal-delay:90ms" href="services/vizaj.html">
+        <img class="service-card__img" src="assets/images/service-makeup.jpg" alt="Визаж и макияж" />
+        <div class="service-card__overlay" aria-hidden="true"></div>
+        <span class="service-card__label">визаж</span>
+      </a>
+
+      <a class="service-card reveal" style="--reveal-delay:180ms" href="services/eyelashes.html">
+        <img class="service-card__img" src="assets/images/service-brows.jpg" alt="Брови и ресницы" />
+        <div class="service-card__overlay" aria-hidden="true"></div>
+        <span class="service-card__label">брови & ресницы</span>
+      </a>
+
+      <a class="service-card reveal" style="--reveal-delay:270ms" href="services/nails.html">
+        <img class="service-card__img" src="assets/images/service-nails.jpg" alt="Маникюр и педикюр" />
+        <div class="service-card__overlay" aria-hidden="true"></div>
+        <span class="service-card__label">ногти</span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="о-салоне" aria-labelledby="about-heading">
+    <div class="about__inner">
+
+      <img class="about__photo-left reveal-fade" src="assets/images/about-left.jpg" alt="Мастер KANYE за работой" />
+
+      <img class="about__logo reveal-fade" src="assets/images/logo-about.svg" alt="KANYE" width="437" height="57" />
+
+      <p class="about__text-main reveal-fade" style="--reveal-delay:100ms">
+        Это ДНК дерзости и характера. Мы создаем образы для тех,
+        кто не боится заявлять о себе и плевать на чужое мнение.
+      </p>
+
+      <p class="about__text-sub reveal-fade" style="--reveal-delay:200ms">Лучшие выбирают лучших.</p>
+
+      <img class="about__photo-main" src="assets/images/about-left.jpg" alt="Мастер KANYE" />
+
+      <p class="about__tagline reveal-fade" style="--reveal-delay:300ms" id="about-heading">— больше чем красота</p>
+
+      <img class="about__photo-right reveal-right" src="assets/images/about-right.jpg" alt="Интерьер студии KANYE" />
+
+    </div>
+  </section>
+
+  <!-- SALON / ПРОСТРАНСТВО -->
+  <section class="salon" id="пространство" aria-label="Наше пространство">
+    <div class="salon__headline reveal">
+      <p class="salon__space-title">ПРОСТРАНСТВО</p>
+      <div class="salon__logo-wrap">
+        <img class="salon__logo" src="assets/images/logo-salon.svg" alt="KANYE" />
+      </div>
+    </div>
+
+    <div class="salon__texts">
+      <p class="reveal" style="--reveal-delay:0ms">Пространство для тех, кто привык быть №1.</p>
+      <p class="reveal" style="--reveal-delay:120ms">Мы объединили премиальный уход и безграничный креатив. Наши мастера воплощают любые идеи, используя только лучшие материалы.</p>
+      <p class="reveal" style="--reveal-delay:240ms">VIP-кабинет для полной приватности.<br /><br />Отдельная зона маникюра с топовым оборудованием.<br /><br />Услуги в 4–6 рук, чтобы сохранить ваше время.</p>
+    </div>
+
+    <div class="salon__slider-wrap">
+      <div class="salon__cards">
+        <div class="salon__card">
+          <img src="assets/images/salon-photo3.jpg" alt="Стилисты KANYE за работой" />
+        </div>
+        <div class="salon__card">
+          <img src="assets/images/salon-photo1.jpg" alt="Интерьер студии KANYE" />
+        </div>
+        <div class="salon__card">
+          <img src="assets/images/salon-photo2.jpg" alt="Зона маникюра" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="team" id="команда" aria-labelledby="team-heading">
+
+    <h2 class="section-heading team__heading reveal" id="team-heading">НАША КОМАНДА</h2>
+
+    <div class="team__photos">
+      <img class="team__tape team__tape--top" src="assets/images/stop-line.jpg" alt="" aria-hidden="true" />
+
+      <div class="film-strip-wrap reveal-fade" style="--reveal-delay:100ms" aria-hidden="true">
+        <div class="film-strip">
+          <div class="film-strip__holes"></div>
+          <div class="film-strip__photos">
+            <img class="film-strip__photo" src="assets/images/team-photo3.jpg" alt="" />
+            <img class="film-strip__photo" src="assets/images/team-photo5.jpg" alt="" />
+            <img class="film-strip__photo" src="assets/images/team-photo2.jpg" alt="" />
+            <img class="film-strip__photo" src="assets/images/team-photo1.jpg" alt="" />
+            <img class="film-strip__photo" src="assets/images/team-photo4.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+
+      <img class="team__tape team__tape--bottom" src="assets/images/stop-line.jpg" alt="" aria-hidden="true" />
+    </div>
+
+    <div class="team__text">
+      <p class="team__quote reveal">Команда KANYE — те, кто задает правила.</p>
+      <p class="team__desc reveal" style="--reveal-delay:120ms">Случайных людей здесь нет — только эксперты, разделяющие наши ценности. Мы ежедневно бросаем вызов обыденности, создавая образы, которые заставляют оборачиваться. Твой стиль — это наше мастерство.</p>
+    </div>
+
+  </section>
+
+  <!-- FORM FOR JOB -->
+  <section class="job" aria-label="Присоединиться к команде">
+    <p class="job__heading reveal">ПРИСОЕДИНЯЙТЕСЬ И СТРОЙТЕ ПУТЬ<br />В БЬЮТИ ВМЕСТЕ С НАМИ.</p>
+
+    <div class="job__content">
+      <div class="job__doll reveal-left" style="--reveal-delay:80ms">
+        <img src="assets/images/form-doll.jpg" alt="" aria-hidden="true" />
+      </div>
+
+      <form class="job__form reveal-right" style="--reveal-delay:160ms" action="#" method="post" aria-label="Форма для вступления в команду">
+        <div class="job__inputs">
+          <div class="job__input-row">
+            <input class="job__input" type="text" name="name" placeholder="как тебя зовут" autocomplete="name" required aria-label="Как тебя зовут" />
+          </div>
+          <div class="job__input-row">
+            <input class="job__input" type="email" name="email" placeholder="твоя почта" autocomplete="email" required aria-label="Твоя почта" />
+          </div>
+          <div class="job__input-row">
+            <input class="job__input" type="tel" name="phone" placeholder="твой номер" autocomplete="tel" required aria-label="Твой номер" />
+          </div>
+        </div>
+        <button class="job__submit" type="submit">стать частью команды</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- CONTACTS -->
+  <section class="contacts" id="контакты" aria-labelledby="contacts-heading">
+    <h2 class="section-heading contacts__heading reveal" id="contacts-heading">КОНТАКТЫ</h2>
+
+    <div class="contacts__map reveal-fade" style="--reveal-delay:100ms">
+      <iframe
+        src="https://yandex.ru/map-widget/v1/?ll=38.964587%2C45.048138&z=16&pt=38.964587%2C45.048138,pm2rdl&l=map"
+        width="100%"
+        height="100%"
+        frameborder="0"
+        allowfullscreen="true"
+        title="Карта расположения KANYE Beauty Studio"
+      ></iframe>
+    </div>
+
+    <div class="contacts__info reveal" style="--reveal-delay:200ms">
+      <span class="contacts__info-item">КРАСНОДАР</span>
+      <span class="contacts__info-item">УЛ. БАБУШКИНА, 212</span>
+      <a class="contacts__info-item contacts__phone" href="tel:+79183299932">+7 (918) 329-99-32</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer" aria-label="Нижний колонтитул">
+
+    <div class="footer__disclaimer">
+      <p>Все цены, указанные на сайте носят исключительно информативный характер и не являются публичной офертой, определяемой положениями Статьи 437 (2) ГК РФ</p>
+    </div>
+
+    <nav class="footer__nav" aria-label="Навигация в подвале">
+      <a class="footer__nav-link" href="#услуги">услуги</a>
+      <a class="footer__nav-link" href="#о-салоне">о салоне</a>
+      <a class="footer__nav-link" href="#команда">команда</a>
+      <a class="footer__nav-link" href="#">документы</a>
+    </nav>
+
+    <img class="footer__logo" src="assets/images/logo-footer.svg" alt="KANYE" />
+
+  </footer>
+
+  <!-- BOOKING POPUP -->
+  <div class="popup-overlay" id="bookingPopup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+    <div class="popup">
+
+      <div class="popup__bar"><div class="popup__bar-seg" id="barSeg1"></div><div class="popup__bar-seg" id="barSeg2"></div></div>
+      <button class="popup__close" aria-label="Закрыть">&#215;</button>
+
+      <!-- STEP 1: Услуга -->
+      <div class="popup__panel" id="step1">
+        <p class="popup__step-num"><span class="popup__step-current">01</span>/02</p>
+        <h2 class="popup__title" id="popup-title">ВЫБЕРИ УСЛУГУ</h2>
+
+        <div class="popup__categories">
+          <button class="popup__cat active" data-cat="popular">Популярные</button>
+          <button class="popup__cat" data-cat="волосы">Волосы</button>
+          <button class="popup__cat" data-cat="визаж">Визаж</button>
+          <button class="popup__cat" data-cat="брови">Брови &amp; ресницы</button>
+          <button class="popup__cat" data-cat="ногти">Ногти</button>
+        </div>
+
+        <div class="popup__services" id="servicesList"></div>
+
+        <button class="popup__next" id="step1Next" disabled>Далее</button>
+      </div>
+
+      <!-- STEP 2: Контакты -->
+      <div class="popup__panel hidden" id="step2">
+        <p class="popup__step-num"><span class="popup__step-current">02</span>/02</p>
+        <h2 class="popup__title">ТВОИ КОНТАКТЫ</h2>
+
+        <div class="popup__inputs">
+          <div class="popup__input-row">
+            <input class="popup__input" id="bookingName" type="text" placeholder="как тебя зовут" autocomplete="name" />
+          </div>
+          <div class="popup__input-row">
+            <input class="popup__input" id="bookingPhone" type="tel" placeholder="твой номер" autocomplete="tel" />
+          </div>
+          <div class="popup__input-row">
+            <input class="popup__input" id="bookingComment" type="text" placeholder="пожелания или повод (необязательно)" />
+          </div>
+        </div>
+
+        <div class="popup__upsell">
+          <label class="popup__checkbox-label">
+            <input class="popup__checkbox-input" type="checkbox" />
+            <span>VIP-кабинет для полной приватности</span>
+          </label>
+          <label class="popup__checkbox-label">
+            <input class="popup__checkbox-input" type="checkbox" />
+            <span>Записаться на несколько услуг сразу</span>
+          </label>
+          <label class="popup__checkbox-label">
+            <input class="popup__checkbox-input" type="checkbox" />
+            <span>Нужна консультация с мастером</span>
+          </label>
+        </div>
+
+        <button class="popup__submit">записаться в KANYE</button>
+        <p class="popup__trust">Ответим в течение 5 минут и подтвердим запись</p>
+        <button class="popup__back">← назад</button>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="popup__panel hidden popup__success-panel" id="stepSuccess">
+        <div class="popup__success-emoji">✨</div>
+        <h2 class="popup__title">ВЫ<br>ЗАПИСАНЫ</h2>
+        <p class="popup__subtitle">Свяжемся с вами, чтобы подтвердить время и детали вашего образа</p>
+        <div class="popup__social">
+          <a class="popup__social-btn popup__social-wa" href="https://wa.me/79183299932" target="_blank" rel="noopener">WhatsApp</a>
+          <a class="popup__social-btn popup__social-tg" href="https://t.me/kanye_beauty" target="_blank" rel="noopener">Telegram</a>
+        </div>
+        <button class="popup__done-btn">Закрыть</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var grad = document.getElementById('kanye-shine');
+    if (!grad) return;
+    var W = 700, FROM = -W, TO = 1300, DUR = 3200;
+    var startTime = null;
+    function tick(ts) {
+      if (!startTime) startTime = ts;
+      var t = ((ts - startTime) % DUR) / DUR;
+      var x1 = FROM + (TO - FROM) * t;
+      grad.setAttribute('x1', x1.toFixed(1));
+      grad.setAttribute('x2', (x1 + W).toFixed(1));
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }());
+
+  if (window.location.hash) {
+    history.replaceState(null, '', window.location.pathname);
+    window.addEventListener('load', function () {
+      setTimeout(function () { window.scrollTo(0, 0); }, 0);
+    });
+  }
+
+  (function () {
+    function initReveal() {
+      var els = document.querySelectorAll('.reveal, .reveal-fade, .reveal-left, .reveal-right');
+      if (!els.length || !('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('revealed'); });
+        return;
+      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -48px 0px' });
+      els.forEach(function (el) { observer.observe(el); });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initReveal);
+    } else {
+      initReveal();
+    }
+  }());
+
+
+  (function () {
+    var SERVICES_DATA = {
+      popular: ['Женская стрижка', 'Маникюр + гель-лак', 'Окрашивание', 'Ламинирование ресниц'],
+      волосы: ['Стрижка женская', 'Стрижка мужская', 'Окрашивание', 'Мелирование / блонд', 'Укладка', 'Восстановление волос'],
+      визаж: ['Дневной макияж', 'Вечерний макияж', 'Свадебный макияж', 'Коктейльный макияж'],
+      брови: ['Коррекция бровей', 'Окрашивание бровей', 'Ламинирование ресниц', 'Наращивание ресниц', 'Биозавивка ресниц'],
+      ногти: ['Маникюр', 'Маникюр + гель-лак', 'Педикюр', 'Педикюр + покрытие', 'Наращивание ногтей'],
+      unknown: null
+    };
+
+    var selectedService = null;
+    function $id(id) { return document.getElementById(id); }
+
+    function openPopup() {
+      $id('bookingPopup').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closePopup() {
+      $id('bookingPopup').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    window.openBookingPopup = openPopup;
+    window.closeBookingPopup = closePopup;
+
+    window.goToStep = function (n) {
+      document.querySelectorAll('.popup__panel').forEach(function (p) { p.classList.add('hidden'); });
+      var panel = $id(n === 'success' ? 'stepSuccess' : 'step' + n);
+      if (panel) panel.classList.remove('hidden');
+      var seg1 = $id('barSeg1'), seg2 = $id('barSeg2');
+      if (seg1) { seg1.classList.toggle('active', n >= 1); }
+      if (seg2) { seg2.classList.toggle('active', n >= 2 || n === 'success'); }
+      var popup = document.querySelector('.popup');
+      if (popup) popup.scrollTop = 0;
+    };
+
+    function updateServicesList(cat) {
+      var list = $id('servicesList');
+      var services = SERVICES_DATA[cat];
+      if (!services) {
+        list.innerHTML =
+          '<div class="popup__unknown">' +
+            '<p class="popup__unknown-text">Расскажите нам о событии — подберём идеальный образ</p>' +
+            '<div class="popup__event-chips">' +
+              ['Свидание', 'Фотосессия', 'Корпоратив', 'Свадьба', 'Повседневный', 'Другое']
+                .map(function (ev) {
+                  return '<button class="popup__event-chip" onclick="selectEvent(this,\'' + ev + '\')">' + ev + '</button>';
+                }).join('') +
+            '</div></div>';
+        return;
+      }
+      list.innerHTML = services
+        .map(function (s) {
+          return '<button class="popup__service-item" onclick="selectService(this,\'' + s + '\')">' + s + '</button>';
+        }).join('');
+    }
+
+    window.selectService = function (el, name) {
+      document.querySelectorAll('.popup__service-item').forEach(function (i) { i.classList.remove('selected'); });
+      el.classList.add('selected');
+      selectedService = name;
+      $id('step1Next').disabled = false;
+    };
+
+    window.selectEvent = function (el, ev) {
+      document.querySelectorAll('.popup__event-chip').forEach(function (c) { c.classList.remove('active'); });
+      el.classList.add('active');
+      selectedService = 'Подбор образа: ' + ev;
+      $id('step1Next').disabled = false;
+    };
+
+    window.submitBooking = function () {
+      var nameEl = $id('bookingName');
+      var phoneEl = $id('bookingPhone');
+      var valid = true;
+      [nameEl, phoneEl].forEach(function (el) {
+        var row = el.closest('.popup__input-row');
+        if (!el.value.trim()) { row.classList.add('error'); valid = false; }
+        else { row.classList.remove('error'); }
+      });
+      if (!valid) return;
+      window.goToStep('success');
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      updateServicesList('popular');
+      window.goToStep(1);
+
+      var navBtn = $id('navBookingBtn');
+      if (navBtn) navBtn.addEventListener('click', openPopup);
+
+      var heroBtn = $id('heroBookingBtn');
+      if (heroBtn) heroBtn.addEventListener('click', openPopup);
+
+      document.querySelector('.popup__close').addEventListener('click', closePopup);
+      $id('step1Next').addEventListener('click', function () { window.goToStep(2); });
+      document.querySelector('#step2 .popup__back').addEventListener('click', function () { window.goToStep(1); });
+      document.querySelector('.popup__submit').addEventListener('click', window.submitBooking);
+      document.querySelector('.popup__done-btn').addEventListener('click', closePopup);
+
+      document.querySelectorAll('.popup__cat').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.popup__cat').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          selectedService = null;
+          $id('step1Next').disabled = true;
+          updateServicesList(btn.dataset.cat);
+        });
+      });
+
+      $id('bookingPopup').addEventListener('click', function (e) {
+        if (e.target === this) closePopup();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { closePopup(); closeMobileMenu(); }
+      });
+
+      var hamburger = document.querySelector('.nav__hamburger');
+      var mobileMenu = $id('mobileMenu');
+      var mobileMenuClose = $id('mobileMenuClose');
+      var mobileMenuBookingBtn = $id('mobileMenuBookingBtn');
+
+      function openMobileMenu() {
+        mobileMenu.classList.add('is-open');
+        mobileMenu.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMobileMenu() {
+        mobileMenu.classList.remove('is-open');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        if (!$id('bookingPopup').classList.contains('active')) {
+          document.body.style.overflow = '';
+        }
+      }
+
+      if (hamburger) hamburger.addEventListener('click', openMobileMenu);
+      if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMobileMenu);
+      if (mobileMenuBookingBtn) mobileMenuBookingBtn.addEventListener('click', function () {
+        closeMobileMenu();
+        openPopup();
+      });
+      mobileMenu.querySelectorAll('.mobile-menu__link').forEach(function (link) {
+        link.addEventListener('click', closeMobileMenu);
+      });
+    });
+  }());
+  </script>
+
+</body>
+</html>
