@@ -73,7 +73,7 @@
       <!-- E -->
       <path d="M1011.84 0.881675L1200.71 0.86027L1200.71 49.4489L1099.75 49.4476L1099.78 57.1748L1200.73 57.1582L1200.71 105.435L1144.79 105.425L1099.81 105.422L1099.76 113.097L1200.72 113.088L1200.71 161.646L1011.89 161.651L1011.84 0.881675Z" fill="url(#kanye-shine)"/>
     </svg>
-    <img class="hero__fg" src="assets/images/hero-woman-fg.png" alt="" aria-hidden="true" />
+    <img class="hero__fg" src="assets/images/hero-woman-fg.webp" alt="" aria-hidden="true" />
     <img class="hero__strip" src="assets/images/text-strip.svg" alt="" aria-hidden="true" width="1469" height="84" />
     <button class="hero__mobile-cta" type="button" id="heroBookingBtn">записаться</button>
   </section>
@@ -111,27 +111,17 @@
   </section>
 
   <!-- ABOUT -->
-  <section class="about" id="о-салоне" aria-labelledby="about-heading">
-    <div class="about__inner">
-
-      <img class="about__photo-left reveal-fade" src="assets/images/about-left.jpg" alt="Мастер KANYE за работой" />
-
-      <img class="about__logo reveal-fade" src="assets/images/logo-about.svg" alt="KANYE" width="437" height="57" />
-
-      <p class="about__text-main reveal-fade" style="--reveal-delay:100ms">
-        Это ДНК дерзости и характера. Мы создаем образы для тех,
-        кто не боится заявлять о себе и плевать на чужое мнение.
+  <section class="about" id="о-салоне" aria-label="О салоне">
+    <div class="about__bg" id="aboutBg" aria-hidden="true"></div>
+    <img class="about__logo reveal-blur" src="assets/images/logo-about.svg" alt="KANYE" width="437" height="57" style="--reveal-delay:0ms" />
+    <div class="about__text-group">
+      <p class="about__text-main reveal-blur" style="--reveal-delay:250ms">
+        Это ДНК дерзости и характера. Мы создаем образы для тех, кто не боится заявлять
+        о себе и плевать на чужое мнение.
       </p>
-
-      <p class="about__text-sub reveal-fade" style="--reveal-delay:200ms">Лучшие выбирают лучших.</p>
-
-      <img class="about__photo-main" src="assets/images/about-left.jpg" alt="Мастер KANYE" />
-
-      <p class="about__tagline reveal-fade" style="--reveal-delay:300ms" id="about-heading">— больше чем красота</p>
-
-      <img class="about__photo-right reveal-right" src="assets/images/about-right.jpg" alt="Интерьер студии KANYE" />
-
+      <p class="about__text-sub reveal-blur" style="--reveal-delay:400ms">Лучшие выбирают лучших.</p>
     </div>
+    <p class="about__tagline reveal-blur" style="--reveal-delay:550ms">— больше чем красота</p>
   </section>
 
   <!-- SALON / ПРОСТРАНСТВО -->
@@ -141,12 +131,6 @@
       <div class="salon__logo-wrap">
         <img class="salon__logo" src="assets/images/logo-salon.svg" alt="KANYE" />
       </div>
-    </div>
-
-    <div class="salon__texts">
-      <p class="reveal" style="--reveal-delay:0ms">Пространство для тех, кто привык быть №1.</p>
-      <p class="reveal" style="--reveal-delay:120ms">Мы объединили премиальный уход и безграничный креатив. Наши мастера воплощают любые идеи, используя только лучшие материалы.</p>
-      <p class="reveal" style="--reveal-delay:240ms">VIP-кабинет для полной приватности.<br /><br />Отдельная зона маникюра с топовым оборудованием.<br /><br />Услуги в 4–6 рук, чтобы сохранить ваше время.</p>
     </div>
 
     <div class="salon__slider-wrap">
@@ -162,37 +146,30 @@
         </div>
       </div>
     </div>
+
+    <div class="salon__texts">
+      <p class="reveal" style="--reveal-delay:0ms">Пространство для тех, кто привык быть №1.</p>
+      <p class="reveal" style="--reveal-delay:120ms">Мы объединили премиальный уход и безграничный креатив. Наши мастера воплощают любые идеи, используя только лучшие материалы.</p>
+      <p class="reveal" style="--reveal-delay:240ms">VIP-кабинет для полной приватности.<br /><br />Отдельная зона маникюра с топовым оборудованием.<br /><br />Услуги в 4–6 рук, чтобы сохранить ваше время.</p>
+    </div>
   </section>
 
   <!-- TEAM -->
-  <section class="team" id="команда" aria-labelledby="team-heading">
+  <section class="team" id="команда" aria-label="Наша команда">
+    <div class="team__inner">
 
-    <h2 class="section-heading team__heading reveal" id="team-heading">НАША КОМАНДА</h2>
-
-    <div class="team__photos">
-      <img class="team__tape team__tape--top" src="assets/images/stop-line.jpg" alt="" aria-hidden="true" />
-
-      <div class="film-strip-wrap reveal-fade" style="--reveal-delay:100ms" aria-hidden="true">
-        <div class="film-strip">
-          <div class="film-strip__holes"></div>
-          <div class="film-strip__photos">
-            <img class="film-strip__photo" src="assets/images/team-photo3.jpg" alt="" />
-            <img class="film-strip__photo" src="assets/images/team-photo5.jpg" alt="" />
-            <img class="film-strip__photo" src="assets/images/team-photo2.jpg" alt="" />
-            <img class="film-strip__photo" src="assets/images/team-photo1.jpg" alt="" />
-            <img class="film-strip__photo" src="assets/images/team-photo4.jpg" alt="" />
-          </div>
-        </div>
+      <!-- Left: collage image -->
+      <div class="team__strips-area" aria-hidden="true">
+        <img class="team__collage reveal-fade" src="assets/images/team-collage.png" alt="" />
       </div>
 
-      <img class="team__tape team__tape--bottom" src="assets/images/stop-line.jpg" alt="" aria-hidden="true" />
-    </div>
+      <!-- Right: text -->
+      <div class="team__text">
+        <p class="team__quote reveal">Команда KANYE — те, кто задает правила.</p>
+        <p class="team__desc reveal" style="--reveal-delay:120ms">Случайных людей здесь нет — только эксперты, разделяющие наши ценности. Мы ежедневно бросаем вызов обыденности, создавая образы, которые заставляют оборачиваться. Твой стиль — это наше мастерство.</p>
+      </div>
 
-    <div class="team__text">
-      <p class="team__quote reveal">Команда KANYE — те, кто задает правила.</p>
-      <p class="team__desc reveal" style="--reveal-delay:120ms">Случайных людей здесь нет — только эксперты, разделяющие наши ценности. Мы ежедневно бросаем вызов обыденности, создавая образы, которые заставляют оборачиваться. Твой стиль — это наше мастерство.</p>
     </div>
-
   </section>
 
   <!-- FORM FOR JOB -->
@@ -364,7 +341,7 @@
 
   (function () {
     function initReveal() {
-      var els = document.querySelectorAll('.reveal, .reveal-fade, .reveal-left, .reveal-right');
+      var els = document.querySelectorAll('.reveal, .reveal-fade, .reveal-left, .reveal-right, .reveal-blur');
       if (!els.length || !('IntersectionObserver' in window)) {
         els.forEach(function (el) { el.classList.add('revealed'); });
         return;
@@ -534,6 +511,88 @@
       });
     });
   }());
+  // ─── PREMIUM ANIMATIONS ────────────────────────────────────────────────
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+
+    // 1. Split heading text into per-character spans and override parent reveal
+    function splitChars(el) {
+      var text = el.textContent.trim();
+      el.style.cssText += ';opacity:1!important;transform:none!important;transition:none!important;';
+      var html = '';
+      for (var i = 0; i < text.length; i++) {
+        var c = text[i];
+        if (c === ' ') {
+          html += ' ';
+        } else {
+          html += '<span class="h-char"><span class="h-char__inner" style="transition-delay:' + (i * 44) + 'ms">' + c + '</span></span>';
+        }
+      }
+      el.innerHTML = html;
+    }
+
+    // 2. Observe headings — reveal chars when in view
+    var headingObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('.h-char__inner').forEach(function (ch) {
+            ch.style.transform = 'translateY(0)';
+          });
+          headingObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.25 });
+
+    document.querySelectorAll('.section-heading, .salon__space-title').forEach(function (el) {
+      splitChars(el);
+      headingObs.observe(el);
+    });
+
+    // 3. Salon cards — staggered scale reveal
+    var scaleObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          scaleObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.salon__card').forEach(function (card, i) {
+      card.classList.add('reveal-scale');
+      card.style.setProperty('--reveal-delay', (i * 130) + 'ms');
+      scaleObs.observe(card);
+    });
+  }());
+  </script>
+
+  <script type="module">
+  import { ShaderMount, meshGradientFragmentShader, getShaderColorFromString } from '/node_modules/@paper-design/shaders/dist/index.js';
+  var bg = document.getElementById('aboutBg');
+  if (bg) {
+    new ShaderMount(bg, meshGradientFragmentShader, {
+      u_colors: [
+        getShaderColorFromString('#f6f4f0'),
+        getShaderColorFromString('#f0e8dc'),
+        getShaderColorFromString('#fce3c8'),
+        getShaderColorFromString('#fdfaf7'),
+      ],
+      u_colorsCount: 4,
+      u_distortion: 0.55,
+      u_swirl: 0.18,
+      u_grainMixer: 0.08,
+      u_grainOverlay: 0.0,
+      u_fit: 2,
+      u_scale: 1,
+      u_rotation: 0,
+      u_originX: 0.5,
+      u_originY: 0.5,
+      u_offsetX: 0,
+      u_offsetY: 0,
+      u_worldWidth: 0,
+      u_worldHeight: 0,
+    }, undefined, 0.35);
+  }
   </script>
 
 </body>

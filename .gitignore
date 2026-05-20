@@ -1,3 +1,9 @@
 node_modules/
+dist/
+.env
+_env
+deploy.config.json
+.DS_Store
+assets/.DS_Store
+assets/images/.DS_Store
 temporary screenshots/
-*.png
