@@ -181,16 +181,19 @@
         <img src="assets/images/form-doll.jpg" alt="" aria-hidden="true" />
       </div>
 
-      <form class="job__form reveal-right" style="--reveal-delay:160ms" action="#" method="post" aria-label="Форма для вступления в команду">
+      <form class="job__form reveal-right" style="--reveal-delay:160ms" action="#" method="post" aria-label="Форма для вступления в команду" novalidate>
         <div class="job__inputs">
-          <div class="job__input-row">
-            <input class="job__input" type="text" name="name" placeholder="как тебя зовут" autocomplete="name" required aria-label="Как тебя зовут" />
+          <div class="job__input-row" id="jobNameRow">
+            <input class="job__input" type="text" name="name" id="jobFormName" placeholder="как тебя зовут" autocomplete="name" aria-label="Как тебя зовут" />
+            <span class="job__error" id="jobNameError" role="alert"></span>
           </div>
-          <div class="job__input-row">
-            <input class="job__input" type="email" name="email" placeholder="твоя почта" autocomplete="email" required aria-label="Твоя почта" />
+          <div class="job__input-row" id="jobEmailRow">
+            <input class="job__input" type="email" name="email" id="jobFormEmail" placeholder="твоя почта" autocomplete="email" aria-label="Твоя почта" />
+            <span class="job__error" id="jobEmailError" role="alert"></span>
           </div>
-          <div class="job__input-row">
-            <input class="job__input" type="tel" name="phone" placeholder="твой номер" autocomplete="tel" required aria-label="Твой номер" />
+          <div class="job__input-row" id="jobPhoneRow">
+            <input class="job__input" type="tel" name="phone" id="jobFormPhone" placeholder="твой номер" autocomplete="tel" aria-label="Твой номер" />
+            <span class="job__error" id="jobPhoneError" role="alert"></span>
           </div>
         </div>
         <button class="job__submit" type="submit">стать частью команды</button>
@@ -234,6 +237,13 @@
       <a class="footer__nav-link" href="#">документы</a>
     </nav>
 
+    <div class="footer__credits">
+      <span>разработано</span>
+      <a href="https://podpisait.ru/" target="_blank" rel="noopener" class="footer__credits-link">
+        <img src="assets/images/podpisait-logo.svg" alt="Подписайт" />
+      </a>
+    </div>
+
     <img class="footer__logo" src="assets/images/logo-footer.svg" alt="KANYE" />
 
   </footer>
@@ -248,7 +258,9 @@
       <!-- STEP 1: Услуга -->
       <div class="popup__panel" id="step1">
         <p class="popup__step-num"><span class="popup__step-current">01</span>/02</p>
-        <h2 class="popup__title" id="popup-title">ВЫБЕРИ УСЛУГУ</h2>
+        <h2 class="popup__title" id="popup-title">ВЫБЕРИ УСЛУГИ</h2>
+        <p class="popup__multi-hint">можно отметить несколько — всё запишем за раз</p>
+        <p class="popup__selected-count" id="selectedCount" aria-live="polite"></p>
 
         <div class="popup__categories">
           <button class="popup__cat active" data-cat="popular">Популярные</button>
@@ -260,7 +272,9 @@
 
         <div class="popup__services" id="servicesList"></div>
 
-        <button class="popup__next" id="step1Next" disabled>Далее</button>
+        <button class="popup__next" id="step1Next" disabled>
+          <span id="step1NextLabel">Далее</span>
+        </button>
       </div>
 
       <!-- STEP 2: Контакты -->
@@ -269,11 +283,13 @@
         <h2 class="popup__title">ТВОИ КОНТАКТЫ</h2>
 
         <div class="popup__inputs">
-          <div class="popup__input-row">
+          <div class="popup__input-row" id="bookingNameRow">
             <input class="popup__input" id="bookingName" type="text" placeholder="как тебя зовут" autocomplete="name" />
+            <span class="popup__error-msg" id="bookingNameError" role="alert"></span>
           </div>
-          <div class="popup__input-row">
+          <div class="popup__input-row" id="bookingPhoneRow">
             <input class="popup__input" id="bookingPhone" type="tel" placeholder="твой номер" autocomplete="tel" />
+            <span class="popup__error-msg" id="bookingPhoneError" role="alert"></span>
           </div>
           <div class="popup__input-row">
             <input class="popup__input" id="bookingComment" type="text" placeholder="пожелания или повод (необязательно)" />
@@ -284,10 +300,6 @@
           <label class="popup__checkbox-label">
             <input class="popup__checkbox-input" type="checkbox" />
             <span>VIP-кабинет для полной приватности</span>
-          </label>
-          <label class="popup__checkbox-label">
-            <input class="popup__checkbox-input" type="checkbox" />
-            <span>Записаться на несколько услуг сразу</span>
           </label>
           <label class="popup__checkbox-label">
             <input class="popup__checkbox-input" type="checkbox" />
@@ -302,16 +314,45 @@
 
       <!-- SUCCESS -->
       <div class="popup__panel hidden popup__success-panel" id="stepSuccess">
-        <div class="popup__success-emoji">✨</div>
-        <h2 class="popup__title">ВЫ<br>ЗАПИСАНЫ</h2>
-        <p class="popup__subtitle">Свяжемся с вами, чтобы подтвердить время и детали вашего образа</p>
+        <div class="popup__success-kn" aria-hidden="true">KANYE</div>
+        <h2 class="popup__title popup__success-title">ВЫ<br>ЗАПИСАНЫ</h2>
+        <p class="popup__success-divider" aria-hidden="true"></p>
+        <p class="popup__subtitle">Свяжемся, чтобы подтвердить время.<br>До встречи в студии.</p>
         <div class="popup__social">
-          <a class="popup__social-btn popup__social-wa" href="https://wa.me/79183299932" target="_blank" rel="noopener">WhatsApp</a>
-          <a class="popup__social-btn popup__social-tg" href="https://t.me/kanye_beauty" target="_blank" rel="noopener">Telegram</a>
+          <a class="popup__social-btn popup__social-wa" href="https://wa.me/79183299932" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.555 4.122 1.528 5.855L0 24l6.335-1.521A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.006-1.372l-.359-.214-3.72.894.929-3.617-.234-.372A9.818 9.818 0 1112 21.818z"/></svg>
+            WhatsApp
+          </a>
+          <a class="popup__social-btn popup__social-tg" href="https://t.me/kanye_beauty" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0a12 12 0 00-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.96 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            Telegram
+          </a>
         </div>
-        <button class="popup__done-btn">Закрыть</button>
+        <button class="popup__done-btn">закрыть</button>
       </div>
 
+    </div>
+  </div>
+
+  <!-- JOB SUCCESS POPUP -->
+  <div class="popup-overlay" id="jobSuccessPopup" role="dialog" aria-modal="true" aria-labelledby="job-success-title">
+    <div class="popup">
+      <button class="popup__close" id="jobSuccessClose" aria-label="Закрыть">&#215;</button>
+      <div class="popup__panel popup__success-panel">
+        <div class="popup__success-emoji">🖤</div>
+        <h2 class="popup__title" id="job-success-title">ЗАЯВКА<br>ПРИНЯТА</h2>
+        <p class="popup__subtitle">Рассмотрим твою анкету и свяжемся в ближайшее время. Добро пожаловать в KANYE.</p>
+        <button class="popup__done-btn" id="jobSuccessDone">Закрыть</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- COOKIE BAR -->
+  <div class="cookie-bar" id="cookieBar" role="region" aria-label="Уведомление о cookies">
+    <p class="cookie-bar__text">Мы используем файлы cookie для корректной работы сайта и улучшения сервиса.</p>
+    <div class="cookie-bar__actions">
+      <button class="cookie-bar__accept" id="cookieAccept">принять</button>
+      <button class="cookie-bar__decline" id="cookieDecline">отклонить</button>
     </div>
   </div>
 
@@ -364,7 +405,6 @@
     }
   }());
 
-
   (function () {
     var SERVICES_DATA = {
       popular: ['Женская стрижка', 'Маникюр + гель-лак', 'Окрашивание', 'Ламинирование ресниц'],
@@ -375,13 +415,50 @@
       unknown: null
     };
 
-    var selectedService = null;
+    var selectedServices = [];
     function $id(id) { return document.getElementById(id); }
 
+    function updateSelectedCount() {
+      var el = $id('selectedCount');
+      var n = selectedServices.length;
+      if (el) {
+        if (n === 0) {
+          el.textContent = '';
+          el.classList.remove('has-selection');
+        } else {
+          el.textContent = n === 1 ? '1 услуга выбрана' : n + ' услуги выбраны';
+          el.classList.add('has-selection');
+        }
+      }
+      var lbl = $id('step1NextLabel');
+      if (lbl) {
+        lbl.textContent = n === 0 ? 'Далее' : 'Далее · ' + n;
+      }
+    }
+
     function openPopup() {
+      selectedServices = [];
+      $id('step1Next').disabled = true;
+      updateSelectedCount();
+      // сбрасываем активную категорию на «Популярные»
+      document.querySelectorAll('.popup__cat').forEach(function (b) { b.classList.remove('active'); });
+      var firstCat = document.querySelector('.popup__cat[data-cat="popular"]');
+      if (firstCat) firstCat.classList.add('active');
+      updateServicesList('popular');
+      window.goToStep(1);
+      ['bookingName', 'bookingPhone', 'bookingComment'].forEach(function (id) {
+        var el = $id(id); if (el) el.value = '';
+      });
+      ['bookingNameRow', 'bookingPhoneRow'].forEach(function (id) {
+        var row = $id(id); if (row) row.classList.remove('error');
+      });
+      ['bookingNameError', 'bookingPhoneError'].forEach(function (id) {
+        var el = $id(id); if (el) el.textContent = '';
+      });
       $id('bookingPopup').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
+
     function closePopup() {
       $id('bookingPopup').classList.remove('active');
       document.body.style.overflow = '';
@@ -391,13 +468,13 @@
     window.closeBookingPopup = closePopup;
 
     window.goToStep = function (n) {
-      document.querySelectorAll('.popup__panel').forEach(function (p) { p.classList.add('hidden'); });
+      document.querySelectorAll('#bookingPopup .popup__panel').forEach(function (p) { p.classList.add('hidden'); });
       var panel = $id(n === 'success' ? 'stepSuccess' : 'step' + n);
       if (panel) panel.classList.remove('hidden');
       var seg1 = $id('barSeg1'), seg2 = $id('barSeg2');
       if (seg1) { seg1.classList.toggle('active', n >= 1); }
       if (seg2) { seg2.classList.toggle('active', n >= 2 || n === 'success'); }
-      var popup = document.querySelector('.popup');
+      var popup = document.querySelector('#bookingPopup .popup');
       if (popup) popup.scrollTop = 0;
     };
 
@@ -411,28 +488,53 @@
             '<div class="popup__event-chips">' +
               ['Свидание', 'Фотосессия', 'Корпоратив', 'Свадьба', 'Повседневный', 'Другое']
                 .map(function (ev) {
-                  return '<button class="popup__event-chip" onclick="selectEvent(this,\'' + ev + '\')">' + ev + '</button>';
+                  return '<button class="popup__event-chip" data-event="' + ev + '">' + ev + '</button>';
                 }).join('') +
             '</div></div>';
         return;
       }
       list.innerHTML = services
         .map(function (s) {
-          return '<button class="popup__service-item" onclick="selectService(this,\'' + s + '\')">' + s + '</button>';
+          var isSelected = selectedServices.indexOf(s) !== -1;
+          return '<button class="popup__service-item' + (isSelected ? ' selected' : '') + '" data-service="' + s.replace(/"/g, '&quot;') + '">' +
+            '<span class="popup__svc-chk" aria-hidden="true"></span>' +
+            '<span class="popup__svc-name">' + s + '</span>' +
+            '</button>';
         }).join('');
     }
 
-    window.selectService = function (el, name) {
-      document.querySelectorAll('.popup__service-item').forEach(function (i) { i.classList.remove('selected'); });
-      el.classList.add('selected');
-      selectedService = name;
-      $id('step1Next').disabled = false;
-    };
+    /* event delegation — надёжнее inline onclick */
+    document.addEventListener('DOMContentLoaded', function () {
+      var list = $id('servicesList');
+      if (list) {
+        list.addEventListener('click', function (e) {
+          var btn = e.target.closest('.popup__service-item');
+          if (btn) {
+            var name = btn.dataset.service;
+            var idx = selectedServices.indexOf(name);
+            if (idx === -1) { selectedServices.push(name); btn.classList.add('selected'); }
+            else { selectedServices.splice(idx, 1); btn.classList.remove('selected'); }
+            updateSelectedCount();
+            $id('step1Next').disabled = selectedServices.length === 0;
+            return;
+          }
+          var chip = e.target.closest('.popup__event-chip');
+          if (chip) {
+            list.querySelectorAll('.popup__event-chip').forEach(function (c) { c.classList.remove('active'); });
+            chip.classList.add('active');
+            selectedServices = ['Подбор образа: ' + chip.dataset.event];
+            updateSelectedCount();
+            $id('step1Next').disabled = false;
+          }
+        });
+      }
+    });
 
     window.selectEvent = function (el, ev) {
       document.querySelectorAll('.popup__event-chip').forEach(function (c) { c.classList.remove('active'); });
       el.classList.add('active');
-      selectedService = 'Подбор образа: ' + ev;
+      selectedServices = ['Подбор образа: ' + ev];
+      updateSelectedCount();
       $id('step1Next').disabled = false;
     };
 
@@ -440,11 +542,38 @@
       var nameEl = $id('bookingName');
       var phoneEl = $id('bookingPhone');
       var valid = true;
-      [nameEl, phoneEl].forEach(function (el) {
-        var row = el.closest('.popup__input-row');
-        if (!el.value.trim()) { row.classList.add('error'); valid = false; }
-        else { row.classList.remove('error'); }
-      });
+
+      var nameRow = $id('bookingNameRow');
+      var nameErr = $id('bookingNameError');
+      if (!nameEl.value.trim()) {
+        if (nameRow) nameRow.classList.add('error');
+        if (nameErr) nameErr.textContent = 'введи своё имя';
+        valid = false;
+      } else if (nameEl.value.trim().length < 2) {
+        if (nameRow) nameRow.classList.add('error');
+        if (nameErr) nameErr.textContent = 'имя слишком короткое';
+        valid = false;
+      } else {
+        if (nameRow) nameRow.classList.remove('error');
+        if (nameErr) nameErr.textContent = '';
+      }
+
+      var phoneRow = $id('bookingPhoneRow');
+      var phoneErr = $id('bookingPhoneError');
+      var phoneDigits = phoneEl.value.replace(/\D/g, '');
+      if (!phoneEl.value.trim()) {
+        if (phoneRow) phoneRow.classList.add('error');
+        if (phoneErr) phoneErr.textContent = 'введи номер телефона';
+        valid = false;
+      } else if (phoneDigits.length < 10) {
+        if (phoneRow) phoneRow.classList.add('error');
+        if (phoneErr) phoneErr.textContent = 'введи корректный номер';
+        valid = false;
+      } else {
+        if (phoneRow) phoneRow.classList.remove('error');
+        if (phoneErr) phoneErr.textContent = '';
+      }
+
       if (!valid) return;
       window.goToStep('success');
     };
@@ -453,24 +582,34 @@
       updateServicesList('popular');
       window.goToStep(1);
 
+      var bookingNameEl = $id('bookingName');
+      var bookingPhoneEl = $id('bookingPhone');
+      if (bookingNameEl) bookingNameEl.addEventListener('input', function () {
+        var row = $id('bookingNameRow'); if (row) row.classList.remove('error');
+        var err = $id('bookingNameError'); if (err) err.textContent = '';
+      });
+      if (bookingPhoneEl) bookingPhoneEl.addEventListener('input', function () {
+        var row = $id('bookingPhoneRow'); if (row) row.classList.remove('error');
+        var err = $id('bookingPhoneError'); if (err) err.textContent = '';
+      });
+
       var navBtn = $id('navBookingBtn');
       if (navBtn) navBtn.addEventListener('click', openPopup);
 
       var heroBtn = $id('heroBookingBtn');
       if (heroBtn) heroBtn.addEventListener('click', openPopup);
 
-      document.querySelector('.popup__close').addEventListener('click', closePopup);
+      document.querySelector('#bookingPopup .popup__close').addEventListener('click', closePopup);
       $id('step1Next').addEventListener('click', function () { window.goToStep(2); });
       document.querySelector('#step2 .popup__back').addEventListener('click', function () { window.goToStep(1); });
-      document.querySelector('.popup__submit').addEventListener('click', window.submitBooking);
-      document.querySelector('.popup__done-btn').addEventListener('click', closePopup);
+      document.querySelector('#step2 .popup__submit').addEventListener('click', window.submitBooking);
+      document.querySelector('#stepSuccess .popup__done-btn').addEventListener('click', closePopup);
 
       document.querySelectorAll('.popup__cat').forEach(function (btn) {
         btn.addEventListener('click', function () {
           document.querySelectorAll('.popup__cat').forEach(function (b) { b.classList.remove('active'); });
           btn.classList.add('active');
-          selectedService = null;
-          $id('step1Next').disabled = true;
+          // не сбрасываем выбор — сохраняем отмеченные из других категорий
           updateServicesList(btn.dataset.cat);
         });
       });
@@ -478,8 +617,13 @@
       $id('bookingPopup').addEventListener('click', function (e) {
         if (e.target === this) closePopup();
       });
+
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') { closePopup(); closeMobileMenu(); }
+        if (e.key === 'Escape') {
+          closePopup();
+          closeJobSuccess();
+          closeMobileMenu();
+        }
       });
 
       var hamburger = document.querySelector('.nav__hamburger');
@@ -509,13 +653,115 @@
       mobileMenu.querySelectorAll('.mobile-menu__link').forEach(function (link) {
         link.addEventListener('click', closeMobileMenu);
       });
+
+      // ── COOKIE BAR ──────────────────────────────────────────────────
+      var cookieBar = $id('cookieBar');
+      if (cookieBar) {
+        if (localStorage.getItem('kn_cookies')) {
+          cookieBar.style.display = 'none';
+        } else {
+          requestAnimationFrame(function () { cookieBar.classList.add('visible'); });
+          $id('cookieAccept').addEventListener('click', function () {
+            localStorage.setItem('kn_cookies', '1');
+            cookieBar.classList.remove('visible');
+          });
+          $id('cookieDecline').addEventListener('click', function () {
+            cookieBar.classList.remove('visible');
+          });
+        }
+      }
+
+      // ── JOB FORM VALIDATION ─────────────────────────────────────────
+      var jobForm = document.querySelector('.job__form');
+      if (jobForm) {
+        var jobNameEl = $id('jobFormName');
+        var jobEmailEl = $id('jobFormEmail');
+        var jobPhoneEl = $id('jobFormPhone');
+
+        function clearJobError(rowId, errId) {
+          var row = $id(rowId); if (row) row.classList.remove('error');
+          var err = $id(errId); if (err) err.textContent = '';
+        }
+        function showJobError(rowId, errId, msg) {
+          var row = $id(rowId); if (row) row.classList.add('error');
+          var err = $id(errId); if (err) err.textContent = msg;
+        }
+
+        if (jobNameEl) jobNameEl.addEventListener('input', function () { clearJobError('jobNameRow', 'jobNameError'); });
+        if (jobEmailEl) jobEmailEl.addEventListener('input', function () { clearJobError('jobEmailRow', 'jobEmailError'); });
+        if (jobPhoneEl) jobPhoneEl.addEventListener('input', function () { clearJobError('jobPhoneRow', 'jobPhoneError'); });
+
+        jobForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var valid = true;
+
+          if (!jobNameEl || !jobNameEl.value.trim()) {
+            showJobError('jobNameRow', 'jobNameError', 'введи своё имя');
+            valid = false;
+          } else if (jobNameEl.value.trim().length < 2) {
+            showJobError('jobNameRow', 'jobNameError', 'имя слишком короткое');
+            valid = false;
+          } else {
+            clearJobError('jobNameRow', 'jobNameError');
+          }
+
+          var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!jobEmailEl || !jobEmailEl.value.trim()) {
+            showJobError('jobEmailRow', 'jobEmailError', 'введи свою почту');
+            valid = false;
+          } else if (!emailRegex.test(jobEmailEl.value.trim())) {
+            showJobError('jobEmailRow', 'jobEmailError', 'проверь формат почты');
+            valid = false;
+          } else {
+            clearJobError('jobEmailRow', 'jobEmailError');
+          }
+
+          var jobPhoneDigits = jobPhoneEl ? jobPhoneEl.value.replace(/\D/g, '') : '';
+          if (!jobPhoneEl || !jobPhoneEl.value.trim()) {
+            showJobError('jobPhoneRow', 'jobPhoneError', 'введи свой номер');
+            valid = false;
+          } else if (jobPhoneDigits.length < 10) {
+            showJobError('jobPhoneRow', 'jobPhoneError', 'введи корректный номер');
+            valid = false;
+          } else {
+            clearJobError('jobPhoneRow', 'jobPhoneError');
+          }
+
+          if (!valid) return;
+
+          var popup = $id('jobSuccessPopup');
+          if (popup) {
+            popup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+          jobForm.reset();
+        });
+      }
+
+      // ── JOB SUCCESS POPUP CLOSE ─────────────────────────────────────
+      function closeJobSuccess() {
+        var popup = $id('jobSuccessPopup');
+        if (popup) {
+          popup.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+
+      var jobSuccessClose = $id('jobSuccessClose');
+      var jobSuccessDone = $id('jobSuccessDone');
+      var jobSuccessPopup = $id('jobSuccessPopup');
+      if (jobSuccessClose) jobSuccessClose.addEventListener('click', closeJobSuccess);
+      if (jobSuccessDone) jobSuccessDone.addEventListener('click', closeJobSuccess);
+      if (jobSuccessPopup) jobSuccessPopup.addEventListener('click', function (e) {
+        if (e.target === this) closeJobSuccess();
+      });
     });
   }());
+
   // ─── PREMIUM ANIMATIONS ────────────────────────────────────────────────
   (function () {
     if (!('IntersectionObserver' in window)) return;
 
-    // 1. Split heading text into per-character spans and override parent reveal
     function splitChars(el) {
       var text = el.textContent.trim();
       el.style.cssText += ';opacity:1!important;transform:none!important;transition:none!important;';
@@ -523,7 +769,7 @@
       for (var i = 0; i < text.length; i++) {
         var c = text[i];
         if (c === ' ') {
-          html += ' ';
+          html += ' ';
         } else {
           html += '<span class="h-char"><span class="h-char__inner" style="transition-delay:' + (i * 44) + 'ms">' + c + '</span></span>';
         }
@@ -531,7 +777,6 @@
       el.innerHTML = html;
     }
 
-    // 2. Observe headings — reveal chars when in view
     var headingObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
@@ -548,7 +793,6 @@
       headingObs.observe(el);
     });
 
-    // 3. Salon cards — staggered scale reveal
     var scaleObs = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
