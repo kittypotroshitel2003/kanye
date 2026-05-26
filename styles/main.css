@@ -578,6 +578,9 @@ a {
   height: 100%;
   object-fit: cover;
   object-position: bottom;
+  -webkit-user-drag: none;
+  user-select: none;
+  pointer-events: none;
 }
 
 /* === TEAM === */
@@ -1259,9 +1262,11 @@ a {
   .salon__slider-wrap {
     width: 100%;
     overflow-x: scroll;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+    touch-action: pan-x;
   }
   .salon__slider-wrap::-webkit-scrollbar {
     display: none;
@@ -1532,9 +1537,11 @@ a {
     margin-top: 40px;
     width: 100%;
     overflow-x: scroll;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+    touch-action: pan-x;
   }
   .salon__slider-wrap::-webkit-scrollbar {
     display: none;
@@ -1875,9 +1882,11 @@ a {
     margin-top: 40px;
     width: 100%;
     overflow-x: scroll;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
+    touch-action: pan-x;
   }
   .salon__slider-wrap::-webkit-scrollbar {
     display: none;
