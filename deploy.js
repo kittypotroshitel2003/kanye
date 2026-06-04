@@ -20,6 +20,36 @@ import { execSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import readline from "node:readline";
+import { pathToFileURL } from "node:url";
+
+// ── Form relay integration ──────────────────────────────────────────────
+
+export const FORM_SCRIPT_TAG =
+  '<script src="https://forms.a-4-to.ru/form.js" defer></script>';
+
+// Insert the form relay script just before </head>, once.
+export function injectFormScript(html) {
+  if (html.includes("forms.a-4-to.ru/form.js")) return html;
+  const idx = html.search(/<\/head>/i);
+  if (idx === -1) return html;
+  return html.slice(0, idx) + "    " + FORM_SCRIPT_TAG + "\n  " + html.slice(idx);
+}
+
+const SITES_CONFIG_PATH = "/srv/forms/sites.json";
+
+// Merge one domain→{chatId,name} entry into a sites.json string.
+export function mergeSiteConfig(existingJson, domain, chatId, name) {
+  let obj = {};
+  try {
+    obj = existingJson && existingJson.trim() ? JSON.parse(existingJson) : {};
+  } catch {
+    obj = {};
+  }
+  const entry = { chatId };
+  if (name) entry.name = name;
+  obj[domain] = entry;
+  return JSON.stringify(obj, null, 2) + "\n";
+}
 
 // ── Constants ───────────────────────────────────────────────────────────
 
@@ -42,17 +72,25 @@ function err(msg) {
   console.error(`\x1b[31m✗\x1b[0m ${msg}`);
 }
 
+// Single shared readline so multiple sequential prompts work (including when
+// stdin is piped). Closed once via closePrompt() when the process is done.
+let _rl = null;
 function prompt(question) {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-  return new Promise((resolve) => {
-    rl.question(question, (answer) => {
-      rl.close();
-      resolve(answer.trim());
+  if (!_rl) {
+    _rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
     });
+  }
+  return new Promise((resolve) => {
+    _rl.question(question, (answer) => resolve(answer.trim()));
   });
+}
+function closePrompt() {
+  if (_rl) {
+    _rl.close();
+    _rl = null;
+  }
 }
 
 // ── Bootstrap: install deps & patch package.json ────────────────────────
@@ -176,6 +214,10 @@ async function initConfig() {
   const config = { domain, type };
   fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2) + "\n");
   ok(`Config saved: ${domain} (${type})`);
+
+  // Optional Telegram group — kept in-memory only (not persisted to config file)
+  const chatId = await prompt("Telegram chat id for notifications (Enter to skip): ");
+  if (chatId.trim()) config.telegramPending = chatId.trim();
   return config;
 }
 
@@ -273,23 +315,46 @@ async function sshExec(creds, command) {
 
 // ── Collect static site files ────────────────────────────────────────────
 
-const STATIC_IGNORE = new Set([
+// Always skipped, at ANY depth (dev tooling, VCS, OS cruft, secrets, dev docs)
+const STATIC_IGNORE_ALWAYS = new Set([
   ".git",
-  ".env",
+  ".DS_Store",
   "node_modules",
+  ".claude",
+  ".beads",
+  ".dolt",
+  "superpowers", // brainstorm/spec/plan docs under docs/superpowers
+]);
+
+// Skipped only at the project root (deploy/env/tooling/source files)
+const STATIC_IGNORE_ROOT = new Set([
+  ".env",
+  "_env",
   "dist",
   "deploy.js",
+  "deploy_test.mjs",
   "deploy.config.json",
   "DEPLOY.md",
   "package.json",
   "package-lock.json",
   ".gitignore",
+  "CLAUDE.md",
+  "AGENTS.md",
+  "GEMINI.md",
+  "serve.mjs",
+  "screenshot.mjs",
+  "temporary screenshots",
+  "server", // Go form-relay source + compiled binary
+  "ops",     // server provisioning artifacts
 ]);
 
 function collectStaticFiles(dir, baseDir = dir) {
   const results = [];
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (dir === baseDir && STATIC_IGNORE.has(entry.name)) continue;
+    if (STATIC_IGNORE_ALWAYS.has(entry.name)) continue;
+    if (dir === baseDir && STATIC_IGNORE_ROOT.has(entry.name)) continue;
+    // Skip any leftover hidden dotfiles/dotdirs at the project root
+    if (dir === baseDir && entry.name.startsWith(".")) continue;
     const fullPath = path.join(dir, entry.name);
     if (entry.isDirectory()) {
       results.push(...collectStaticFiles(fullPath, baseDir));
@@ -316,6 +381,12 @@ async function uploadDist(creds, domain) {
       await sftp.rmdir(remotePath, true);
     }
     await sftp.mkdir(remotePath, true);
+
+    // Inject the form relay script into the built index.html (idempotent)
+    const distIndex = path.join(DIST_DIR, "index.html");
+    if (fs.existsSync(distIndex)) {
+      fs.writeFileSync(distIndex, injectFormScript(fs.readFileSync(distIndex, "utf8")));
+    }
 
     await sftp.uploadDir(DIST_DIR, remotePath);
   } finally {
@@ -349,10 +420,17 @@ async function uploadStatic(creds, domain) {
       const remoteDir = `${remotePath}/${dir.replace(/\\/g, "/")}`;
       await sftp.mkdir(remoteDir, true);
     }
-    // Upload files
+    // Upload files (inject form relay script into HTML in-flight; sources stay clean)
     for (const file of files) {
       const rel = path.relative(baseDir, file).replace(/\\/g, "/");
-      await sftp.put(file, `${remotePath}/${rel}`);
+      const remote = `${remotePath}/${rel}`;
+      if (file.toLowerCase().endsWith(".html")) {
+        const html = fs.readFileSync(file, "utf8");
+        const patched = injectFormScript(html);
+        await sftp.put(Buffer.from(patched, "utf8"), remote);
+      } else {
+        await sftp.put(file, remote);
+      }
     }
   } finally {
     await sftp.end();
@@ -416,10 +494,55 @@ async function configureCaddy(creds, domain, type) {
   ok("Caddy configured and reloaded");
 }
 
+// ── Register site → Telegram group on the server ─────────────────────────
+
+async function registerTelegram(creds, domain, chatId, name) {
+  // The deploy user owns sites.json (chmod 664), so no sudo needed.
+  // Read current config (empty if missing), merge this entry, write back.
+  let current = "";
+  try {
+    current = await sshExec(creds, `cat ${SITES_CONFIG_PATH} 2>/dev/null || true`);
+  } catch {
+    current = "";
+  }
+  const merged = mergeSiteConfig(current, domain, chatId, name);
+  const escaped = merged.replace(/'/g, "'\\''");
+  await sshExec(creds, `printf '%s' '${escaped}' > ${SITES_CONFIG_PATH}`);
+  ok(`Telegram group registered for ${domain}`);
+}
+
 // ── Main ────────────────────────────────────────────────────────────────
 
 async function main() {
   const args = process.argv.slice(2);
+
+  // --telegram: register this site's Telegram group on the server
+  if (args.includes("--telegram")) {
+    await import("dotenv/config");
+    const creds = getServerCreds();
+    const config = loadConfig();
+    // Allow non-interactive use: node deploy.js --telegram <chatId> [name]
+    const tgIdx = args.indexOf("--telegram");
+    const argChatId =
+      args[tgIdx + 1] && !args[tgIdx + 1].startsWith("--") ? args[tgIdx + 1] : "";
+    const argName =
+      args[tgIdx + 2] && !args[tgIdx + 2].startsWith("--") ? args[tgIdx + 2] : "";
+
+    let chatId = argChatId;
+    if (!chatId) {
+      chatId = await prompt("Telegram chat id (e.g. -100123… , Enter to skip): ");
+    }
+    if (!chatId.trim()) {
+      log("No chat id entered — Telegram sending stays disabled for this site");
+      return;
+    }
+    let name = argName;
+    if (!name && !argChatId) {
+      name = await prompt("Site display name for messages (optional): ");
+    }
+    await registerTelegram(creds, config.domain, chatId.trim(), name.trim());
+    return;
+  }
 
   // --list: show all deployed sites
   if (args.includes("--list")) {
@@ -480,7 +603,12 @@ async function main() {
     ensureScripts();
     ensureGitignore();
     ensureEnv();
-    await initConfig();
+    const cfg = await initConfig();
+    if (cfg.telegramPending) {
+      await import("dotenv/config");
+      const creds = getServerCreds();
+      await registerTelegram(creds, cfg.domain, cfg.telegramPending, "");
+    }
 
     console.log("\n\x1b[32m\x1b[1mDone!\x1b[0m");
     console.log("  1. Fill in .env with server credentials");
@@ -536,7 +664,15 @@ async function main() {
   console.log(`\n\x1b[32m\x1b[1m✓ Deployed!\x1b[0m https://${domain}\n`);
 }
 
-main().catch((e) => {
-  err(e.message);
-  process.exit(1);
-});
+function isMain() {
+  return process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href;
+}
+
+if (isMain()) {
+  main()
+    .catch((e) => {
+      err(e.message);
+      process.exitCode = 1;
+    })
+    .finally(() => closePrompt());
+}
