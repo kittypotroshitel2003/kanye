@@ -37,6 +37,23 @@ export function injectFormScript(html) {
 
 const SITES_CONFIG_PATH = "/srv/forms/sites.json";
 
+// Set/overwrite the Telegram fields on a deploy.config.json object.
+export function withTelegramConfig(config, chatId, name) {
+  const out = { ...config };
+  out.telegramChatId = chatId;
+  if (name) out.telegramName = name;
+  else delete out.telegramName;
+  return out;
+}
+
+// Persist the Telegram binding into deploy.config.json so future deploys re-apply it.
+function saveTelegramToConfig(chatId, name) {
+  if (!fs.existsSync(CONFIG_FILE)) return;
+  const config = JSON.parse(fs.readFileSync(CONFIG_FILE, "utf8"));
+  const updated = withTelegramConfig(config, chatId, name);
+  fs.writeFileSync(CONFIG_FILE, JSON.stringify(updated, null, 2) + "\n");
+}
+
 // Merge one domain→{chatId,name} entry into a sites.json string.
 export function mergeSiteConfig(existingJson, domain, chatId, name) {
   let obj = {};
@@ -211,13 +228,13 @@ async function initConfig() {
   const typeAnswer = await prompt("Site type — spa or static? (default: spa): ");
   const type = typeAnswer === "static" ? "static" : "spa";
 
+  // Optional Telegram group — persisted to config; applied on first deploy.
+  const chatId = await prompt("Telegram chat id for notifications (Enter to skip): ");
+
   const config = { domain, type };
+  if (chatId.trim()) config.telegramChatId = chatId.trim();
   fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2) + "\n");
   ok(`Config saved: ${domain} (${type})`);
-
-  // Optional Telegram group — kept in-memory only (not persisted to config file)
-  const chatId = await prompt("Telegram chat id for notifications (Enter to skip): ");
-  if (chatId.trim()) config.telegramPending = chatId.trim();
   return config;
 }
 
@@ -541,6 +558,7 @@ async function main() {
       name = await prompt("Site display name for messages (optional): ");
     }
     await registerTelegram(creds, config.domain, chatId.trim(), name.trim());
+    saveTelegramToConfig(chatId.trim(), name.trim()); // persist so deploys re-apply
     return;
   }
 
@@ -603,16 +621,11 @@ async function main() {
     ensureScripts();
     ensureGitignore();
     ensureEnv();
-    const cfg = await initConfig();
-    if (cfg.telegramPending) {
-      await import("dotenv/config");
-      const creds = getServerCreds();
-      await registerTelegram(creds, cfg.domain, cfg.telegramPending, "");
-    }
+    await initConfig();
 
     console.log("\n\x1b[32m\x1b[1mDone!\x1b[0m");
     console.log("  1. Fill in .env with server credentials");
-    console.log("  2. Run: npm run deploy\n");
+    console.log("  2. Run: npm run deploy  (also wires the Telegram group if set)\n");
     return;
   }
 
@@ -660,6 +673,12 @@ async function main() {
   // Step 5: Caddy
   log("Checking Caddy config...");
   await configureCaddy(creds, domain, type);
+
+  // Step 6: Telegram group binding (if configured) — idempotent, keeps server in sync
+  if (config.telegramChatId) {
+    log("Registering Telegram group...");
+    await registerTelegram(creds, domain, config.telegramChatId, config.telegramName || "");
+  }
 
   console.log(`\n\x1b[32m\x1b[1m✓ Deployed!\x1b[0m https://${domain}\n`);
 }
