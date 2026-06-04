@@ -578,6 +578,21 @@
       }
 
       if (!valid) return;
+
+      // Send the booking to the relay (custom widget → explicit FormRelay.send)
+      if (window.FormRelay) {
+        var upsell = document.querySelectorAll('#step2 .popup__upsell .popup__checkbox-input');
+        var commentEl = $id('bookingComment');
+        window.FormRelay.send({
+          'Услуги': selectedServices.join(', '),
+          'Имя': nameEl.value.trim(),
+          'Телефон': phoneEl.value.trim(),
+          'Пожелания': commentEl ? commentEl.value.trim() : '',
+          'VIP-кабинет': (upsell[0] && upsell[0].checked) ? 'да' : '',
+          'Консультация': (upsell[1] && upsell[1].checked) ? 'да' : ''
+        }, { form: 'Запись (главная форма)' });
+      }
+
       window.goToStep('success');
     };
 
