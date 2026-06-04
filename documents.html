@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Документы — KANYE Beauty Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700&family=Oranienbaum&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <style>
+    .docs-page {
+      min-height: 100vh;
+      background-color: var(--color-bg);
+      padding: calc(var(--nav-height) + 80px) 80px 80px;
+    }
+
+    .docs-page__heading {
+      font-family: var(--font-oranienbaum);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 400;
+      color: var(--color-orange);
+      line-height: 1;
+      margin-bottom: 64px;
+      letter-spacing: -0.02em;
+    }
+
+    .docs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      max-width: 900px;
+    }
+
+    .docs-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 36px;
+      background-color: #222;
+      border-left: 3px solid var(--color-orange);
+      transition: background-color 0.2s, border-color 0.2s;
+      text-decoration: none;
+      color: var(--color-cream);
+    }
+
+    .docs-item:hover {
+      background-color: #2a2a2a;
+    }
+
+    .docs-item:hover .docs-item__arrow {
+      transform: translateX(4px);
+    }
+
+    .docs-item__name {
+      font-family: var(--font-golos);
+      font-size: 17px;
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    .docs-item__meta {
+      font-family: var(--font-golos);
+      font-size: 13px;
+      color: #888;
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .docs-item__arrow {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      color: var(--color-orange);
+      transition: transform 0.2s;
+    }
+
+    .docs-page__domain {
+      margin-top: 64px;
+      font-family: var(--font-golos);
+      font-size: 14px;
+      color: #555;
+    }
+
+    .docs-page__domain a {
+      color: var(--color-orange);
+      opacity: 0.7;
+    }
+
+    .docs-page__domain a:hover {
+      opacity: 1;
+    }
+
+    .docs-footer {
+      margin-top: 80px;
+      padding-top: 32px;
+      border-top: 1px solid #2a2a2a;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .docs-footer__back {
+      font-family: var(--font-golos);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--color-orange);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: opacity 0.2s;
+    }
+
+    .docs-footer__back:hover {
+      opacity: 0.7;
+    }
+
+    @media (max-width: 768px) {
+      .docs-page {
+        padding: calc(var(--nav-height) + 48px) 24px 48px;
+      }
+
+      .docs-item {
+        padding: 20px 20px;
+      }
+
+      .docs-item__name {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <a href="/" aria-label="KANYE — на главную">
+      <img class="nav__logo" src="assets/images/logo-nav.svg" alt="KANYE" width="161" height="21" />
+    </a>
+    <ul class="nav__links" role="list">
+      <li><a class="nav__link" href="/#услуги">услуги</a></li>
+      <li><a class="nav__link" href="/#о-салоне">о салоне</a></li>
+      <li><a class="nav__link" href="/#команда">команда</a></li>
+      <li><a class="nav__link" href="/#контакты">контакты</a></li>
+    </ul>
+    <button class="nav__hamburger" aria-label="Открыть меню" type="button">
+      <img src="assets/images/menu-icon.svg" alt="" aria-hidden="true" width="19" height="14" />
+    </button>
+  </nav>
+
+  <main class="docs-page">
+
+    <h1 class="docs-page__heading">Документы</h1>
+
+    <ul class="docs-list" role="list">
+
+      <li>
+        <a class="docs-item" href="docs/ПУБЛИЧНАЯ_ОФЕРТА_НА_ОКАЗАНИЕ_БЬЮТИ.doc" download>
+          <div>
+            <div class="docs-item__name">Публичная оферта на оказание бьюти-услуг</div>
+            <div class="docs-item__meta">DOC</div>
+          </div>
+          <svg class="docs-item__arrow" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </li>
+
+      <li>
+        <a class="docs-item" href="docs/СОГЛАСИЕ_НА_ПОЛУЧЕНИЕ_РЕКЛАМНО.doc" download>
+          <div>
+            <div class="docs-item__name">Согласие на получение рекламно-информационных материалов</div>
+            <div class="docs-item__meta">DOC</div>
+          </div>
+          <svg class="docs-item__arrow" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </li>
+
+      <li>
+        <a class="docs-item" href="docs/СОГЛАСИЕ_НА_ОБРАБОТКУ_ПЕРСОНАЛЬНЫХ_ДАННЫХ_ПОЛЬЗОВА.doc" download>
+          <div>
+            <div class="docs-item__name">Согласие на обработку персональных данных пользователя</div>
+            <div class="docs-item__meta">DOC</div>
+          </div>
+          <svg class="docs-item__arrow" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </li>
+
+      <li>
+        <a class="docs-item" href="docs/Политика_в_отношении_обработки_персональных_данных_по_салону.docx" download>
+          <div>
+            <div class="docs-item__name">Политика в отношении обработки персональных данных</div>
+            <div class="docs-item__meta">DOCX</div>
+          </div>
+          <svg class="docs-item__arrow" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 10h12M10 4l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </li>
+
+    </ul>
+
+    <p class="docs-page__domain">
+      <a href="https://kanye-krd.ru" target="_blank" rel="noopener">kanye-krd.ru</a>
+    </p>
+
+    <div class="docs-footer">
+      <a class="docs-footer__back" href="/">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 8H4M4 8l4-4M4 8l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        На главную
+      </a>
+    </div>
+
+  </main>
+
+</body>
+</html>

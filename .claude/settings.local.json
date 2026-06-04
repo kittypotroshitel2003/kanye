@@ -91,7 +91,27 @@
       "Bash(git gc *)",
       "Bash(git count-objects *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code} %{speed_upload}B/s\\\\n\" -H \"Authorization: token $\\(gh auth token\\)\" https://api.github.com/user)",
-      "Bash(gh api *)"
+      "Bash(gh api *)",
+      "Bash(git *)",
+      "Bash(xargs kill -9)",
+      "Bash(awk '{print $NF}')",
+      "Bash(sed -n '898,910p' /Users/Diana/Desktop/kanye/styles/main.css)",
+      "Bash(sed -n '1705,1715p' /Users/Diana/Desktop/kanye/styles/main.css)",
+      "Bash(sed -n '2051,2061p' /Users/Diana/Desktop/kanye/styles/main.css)",
+      "Bash(mkdir -p /Users/Diana/Desktop/kanye/docs)",
+      "Bash(cp \"/Users/Diana/Downloads/ПУБЛИЧНАЯ_ОФЕРТА_НА_ОКАЗАНИЕ_БЬЮТИ.doc\" \"/Users/Diana/Desktop/kanye/docs/ПУБЛИЧНАЯ_ОФЕРТА_НА_ОКАЗАНИЕ_БЬЮТИ.doc\")",
+      "Bash(cp \"/Users/Diana/Downloads/СОГЛАСИЕ НА ПОЛУЧЕНИЕ РЕКЛАМНО.doc\" \"/Users/Diana/Desktop/kanye/docs/СОГЛАСИЕ_НА_ПОЛУЧЕНИЕ_РЕКЛАМНО.doc\")",
+      "Bash(cp \"/Users/Diana/Downloads/СОГЛАСИЕ_НА_ОБРАБОТКУ_ПЕРСОНАЛЬНЫХ_ДАННЫХ_ПОЛЬЗОВА.doc\" \"/Users/Diana/Desktop/kanye/docs/СОГЛАСИЕ_НА_ОБРАБОТКУ_ПЕРСОНАЛЬНЫХ_ДАННЫХ_ПОЛЬЗОВА.doc\")",
+      "Bash(cp \"/Users/Diana/Downloads/Политика_в_отношении_обработки_персональных_данных_по_салону.docx\" \"/Users/Diana/Desktop/kanye/docs/Политика_в_отношении_обработки_персональных_данных_по_салону.docx\")",
+      "Bash(curl -s http://localhost:3000/documents.html)",
+      "Bash(kill 90688)",
+      "Bash(kill 87696)",
+      "Bash(textutil -convert txt \"ПУБЛИЧНАЯ_ОФЕРТА_НА_ОКАЗАНИЕ_БЬЮТИ.doc\" -output /tmp/doc1.txt)",
+      "Bash(textutil -convert txt \"СОГЛАСИЕ_НА_ПОЛУЧЕНИЕ_РЕКЛАМНО.doc\" -output /tmp/doc2.txt)",
+      "Bash(textutil -convert txt \"СОГЛАСИЕ_НА_ОБРАБОТКУ_ПЕРСОНАЛЬНЫХ_ДАННЫХ_ПОЛЬЗОВА.doc\" -output /tmp/doc3.txt)",
+      "Bash(textutil -convert txt \"Политика_в_отношении_обработки_персональных_данных_по_салону.docx\" -output /tmp/doc4.txt)",
+      "Bash(xargs kill)",
+      "Bash(dig +short *)"
     ]
   }
 }
