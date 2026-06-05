@@ -3280,6 +3280,10 @@ button.nav__cta { appearance: none; -webkit-appearance: none; }
     display: none;
   }
 
+  .salon__card--hide-mobile {
+    display: none;
+  }
+
   .salon__slider-wrap {
     overflow-x: scroll;
     overflow-y: hidden;
