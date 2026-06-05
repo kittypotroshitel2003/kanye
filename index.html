@@ -136,17 +136,26 @@
     </div>
 
     <div class="salon__slider-wrap">
-      <div class="salon__cards">
-        <div class="salon__card">
-          <img src="assets/images/salon-photo3.jpg" alt="Стилисты KANYE за работой" />
-        </div>
-        <div class="salon__card">
-          <img src="assets/images/salon-photo1.jpg" alt="Интерьер студии KANYE" />
-        </div>
-        <div class="salon__card">
-          <img src="assets/images/salon-photo2.jpg" alt="Зона маникюра" />
-        </div>
+      <div class="salon__cards" id="salonCards">
+        <div class="salon__card"><img src="assets/images/salon-photo3.jpg" alt="Стилисты KANYE за работой" /></div>
+        <div class="salon__card"><img src="assets/images/salon-photo1.jpg" alt="Интерьер студии KANYE" /></div>
+        <div class="salon__card"><img src="assets/images/salon-photo2.jpg" alt="Зона маникюра" /></div>
+        <div class="salon__card"><img src="assets/images/space-1.jpg" alt="Атмосфера KANYE" /></div>
+        <div class="salon__card"><img src="assets/images/space-2.jpg" alt="Профессиональная косметика TOKIO" /></div>
+        <div class="salon__card"><img src="assets/images/space-3.jpg" alt="Премиальные средства для волос" /></div>
+        <div class="salon__card"><img src="assets/images/space-4.jpg" alt="Интерьер студии KANYE" /></div>
+        <div class="salon__card"><img src="assets/images/space-5.jpg" alt="Детали пространства" /></div>
+        <div class="salon__card"><img src="assets/images/space-6.jpg" alt="Декор студии" /></div>
       </div>
+    </div>
+    <div class="salon__nav">
+      <button class="salon__btn salon__btn--prev" id="salonPrev" aria-label="Предыдущий слайд">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="salon__dots" id="salonDots"></div>
+      <button class="salon__btn salon__btn--next" id="salonNext" aria-label="Следующий слайд">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
 
     <div class="salon__texts">
@@ -162,7 +171,7 @@
 
       <!-- Left: collage image -->
       <div class="team__strips-area" aria-hidden="true">
-        <img class="team__collage reveal-fade" src="assets/images/team-collage.png" alt="" />
+        <img class="team__collage reveal-fade" src="assets/images/team-new.png" alt="" />
       </div>
 
       <!-- Right: text -->
@@ -203,13 +212,40 @@
     </div>
   </section>
 
+  <!-- GALLERY -->
+  <section class="gallery" id="галерея" aria-label="Галерея работ">
+    <h2 class="section-heading gallery__heading reveal">ГАЛЕРЕЯ</h2>
+    <div class="gallery__viewport">
+      <div class="gallery__track" id="galleryTrack">
+        <div class="gallery__slide"><img src="assets/images/gallery-1.jpg" alt="Укладка волос" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/gallery-2.jpg" alt="Стрижка боб" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/gallery-3.jpg" alt="Платиновое окрашивание" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/gallery-4.jpg" alt="Тёмное окрашивание" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/gallery-5.jpg" alt="Объёмные волны" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/gallery-6.jpg" alt="Макияж KANYE" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/gallery-7.jpg" alt="Вечерний образ" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/gallery-8.jpg" alt="Маникюр" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/gallery-9.jpg" alt="Nail art" loading="lazy" /></div>
+      </div>
+    </div>
+    <div class="gallery__controls">
+      <button class="gallery__btn gallery__btn--prev" id="galleryPrev" aria-label="Предыдущее фото">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="gallery__dots" id="galleryDots"></div>
+      <button class="gallery__btn gallery__btn--next" id="galleryNext" aria-label="Следующее фото">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </section>
+
   <!-- CONTACTS -->
   <section class="contacts" id="контакты" aria-labelledby="contacts-heading">
     <h2 class="section-heading contacts__heading reveal" id="contacts-heading">КОНТАКТЫ</h2>
 
     <div class="contacts__map reveal-fade" style="--reveal-delay:100ms">
       <iframe
-        src="https://yandex.ru/map-widget/v1/?ll=38.964587%2C45.048138&z=16&pt=38.964587%2C45.048138,pm2rdl&l=map"
+        src="https://yandex.ru/map-widget/v1/?ll=38.964618%2C45.048183&z=16&pt=38.964618%2C45.048183,pm2rdl&l=map"
         width="100%"
         height="100%"
         frameborder="0"
@@ -1141,6 +1177,125 @@
         }
       });
     }());
+  </script>
+
+  <!-- SALON SLIDER -->
+  <script>
+  (function () {
+    var wrap = document.querySelector('.salon__slider-wrap');
+    var cards = document.getElementById('salonCards');
+    if (!cards || !wrap) return;
+
+    var items = Array.from(cards.querySelectorAll('.salon__card'));
+    var total = items.length;
+    var visible = 3;
+    var maxStep = total - visible;
+    var current = 0;
+
+    var dotsEl = document.getElementById('salonDots');
+    var prevBtn = document.getElementById('salonPrev');
+    var nextBtn = document.getElementById('salonNext');
+
+    var numDots = maxStep + 1;
+    for (var d = 0; d < numDots; d++) {
+      var dot = document.createElement('button');
+      dot.className = 'salon__dot';
+      dot.setAttribute('aria-label', 'Слайд ' + (d + 1));
+      dot.dataset.idx = d;
+      dot.addEventListener('click', function () {
+        goTo(parseInt(this.dataset.idx));
+      });
+      dotsEl.appendChild(dot);
+    }
+
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
+    function goTo(idx) {
+      if (isMobile()) return;
+      current = Math.max(0, Math.min(idx, maxStep));
+      var cardW = items[0].offsetWidth;
+      var gap = 25;
+      cards.style.transform = 'translateX(-' + (current * (cardW + gap)) + 'px)';
+      dotsEl.querySelectorAll('.salon__dot').forEach(function (d, i) {
+        d.classList.toggle('active', i === current);
+      });
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current >= maxStep;
+    }
+
+    prevBtn.addEventListener('click', function () { goTo(current - 1); });
+    nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+    window.addEventListener('resize', function () {
+      if (!isMobile()) {
+        goTo(current);
+      } else {
+        cards.style.transform = '';
+      }
+    });
+
+    goTo(0);
+  }());
+  </script>
+
+  <!-- GALLERY SLIDER -->
+  <script>
+  (function () {
+    var track = document.getElementById('galleryTrack');
+    var dotsEl = document.getElementById('galleryDots');
+    var prevBtn = document.getElementById('galleryPrev');
+    var nextBtn = document.getElementById('galleryNext');
+    if (!track) return;
+
+    var slides = Array.from(track.querySelectorAll('.gallery__slide'));
+    var total = slides.length;
+    var visible = 3;
+    var maxStep = total - visible;
+    var current = 0;
+
+    var numDots = maxStep + 1;
+    for (var d = 0; d < numDots; d++) {
+      var dot = document.createElement('button');
+      dot.className = 'gallery__dot';
+      dot.setAttribute('aria-label', 'Фото ' + (d + 1));
+      dot.dataset.idx = d;
+      dot.addEventListener('click', function () {
+        goTo(parseInt(this.dataset.idx));
+      });
+      dotsEl.appendChild(dot);
+    }
+
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
+    function goTo(idx) {
+      if (isMobile()) return;
+      current = Math.max(0, Math.min(idx, maxStep));
+      var slideW = slides[0].offsetWidth;
+      track.style.transform = 'translateX(-' + (current * slideW) + 'px)';
+      dotsEl.querySelectorAll('.gallery__dot').forEach(function (d, i) {
+        d.classList.toggle('active', i === current);
+      });
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current >= maxStep;
+    }
+
+    prevBtn.addEventListener('click', function () { goTo(current - 1); });
+    nextBtn.addEventListener('click', function () { goTo(current + 1); });
+
+    window.addEventListener('resize', function () {
+      if (!isMobile()) {
+        goTo(current);
+      } else {
+        track.style.transform = '';
+      }
+    });
+
+    goTo(0);
+  }());
   </script>
 
 </body>

@@ -3019,3 +3019,256 @@ button.nav__cta { appearance: none; -webkit-appearance: none; }
     padding: 11px 20px;
   }
 }
+
+/* ─── SALON SLIDER: 6-photo with navigation ─────────────────────────── */
+.salon__slider-wrap {
+  overflow: hidden;
+}
+
+.salon__cards {
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  align-items: stretch;
+}
+
+.salon__card {
+  flex: 0 0 calc((100% - 50px) / 3);
+}
+
+.salon__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.salon__btn {
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid var(--color-orange);
+  background: transparent;
+  color: var(--color-orange);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
+.salon__btn:hover:not(:disabled) {
+  background: var(--color-orange);
+  color: var(--color-bg);
+}
+
+.salon__btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.salon__dots {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.salon__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 93, 0, 0.28);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.salon__dot.active {
+  background: var(--color-orange);
+  transform: scale(1.45);
+}
+
+/* ─── GALLERY SECTION ────────────────────────────────────────────────── */
+.gallery {
+  background-color: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+  padding: 120px 75px;
+}
+
+.gallery__heading {
+  /* inherits .section-heading */
+}
+
+.gallery__viewport {
+  width: 100%;
+  max-width: 1290px;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery__track {
+  display: flex;
+  gap: 0;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.gallery__slide {
+  flex: 0 0 33.333%;
+  padding: 0 10px;
+  overflow: hidden;
+}
+
+.gallery__slide img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.55s ease;
+}
+
+.gallery__slide:hover img {
+  transform: scale(1.04);
+}
+
+.gallery__controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.gallery__btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid var(--color-orange);
+  color: var(--color-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+  flex-shrink: 0;
+}
+
+.gallery__btn:hover:not(:disabled) {
+  background: var(--color-orange);
+  color: var(--color-bg);
+}
+
+.gallery__btn:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.gallery__dots {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.gallery__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 93, 0, 0.28);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.gallery__dot.active {
+  background: var(--color-orange);
+  transform: scale(1.45);
+}
+
+/* ─── Gallery responsive ─────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .gallery {
+    padding: 80px 40px;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery {
+    padding: 60px 0 60px;
+    gap: 32px;
+  }
+
+  .gallery__heading {
+    padding: 0 24px;
+  }
+
+  .gallery__viewport {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .gallery__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery__track {
+    transition: none;
+    transform: none !important;
+    gap: 16px;
+    padding: 0 24px;
+  }
+
+  .gallery__slide {
+    flex: 0 0 72vw;
+    padding: 0;
+    scroll-snap-align: start;
+  }
+
+  .gallery__controls {
+    display: none;
+  }
+
+  /* Salon nav on mobile */
+  .salon__nav {
+    display: none;
+  }
+
+  .salon__slider-wrap {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .salon__slider-wrap::-webkit-scrollbar {
+    display: none;
+  }
+
+  .salon__cards {
+    transition: none;
+    transform: none !important;
+    overflow: visible;
+    gap: 20px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .salon__card,
+  .salon__card:first-child {
+    flex: 0 0 72vw;
+    scroll-snap-align: start;
+  }
+}
