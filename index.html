@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;700&family=Oranienbaum&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/main.css?v=20260605" />
+  <link rel="stylesheet" href="styles/main.css?v=20260605b" />
 </head>
 <body>
 
@@ -137,12 +137,7 @@
 
     <div class="salon__slider-wrap">
       <div class="salon__cards" id="salonCards">
-        <div class="salon__card"><img src="assets/images/salon-photo3.jpg" alt="Стилисты KANYE за работой" /></div>
-        <div class="salon__card"><img src="assets/images/salon-photo1.jpg" alt="Интерьер студии KANYE" /></div>
-        <div class="salon__card"><img src="assets/images/salon-photo2.jpg" alt="Зона маникюра" /></div>
         <div class="salon__card"><img src="assets/images/space-1.jpg" alt="Атмосфера KANYE" /></div>
-        <div class="salon__card"><img src="assets/images/space-2.jpg" alt="Профессиональная косметика TOKIO" /></div>
-        <div class="salon__card"><img src="assets/images/space-3.jpg" alt="Премиальные средства для волос" /></div>
         <div class="salon__card"><img src="assets/images/space-4.jpg" alt="Интерьер студии KANYE" /></div>
         <div class="salon__card"><img src="assets/images/space-5.jpg" alt="Детали пространства" /></div>
         <div class="salon__card"><img src="assets/images/space-6.jpg" alt="Декор студии" /></div>
@@ -225,7 +220,6 @@
         <div class="gallery__slide"><img src="assets/images/gallery-6.jpg" alt="Макияж KANYE" loading="lazy" /></div>
         <div class="gallery__slide"><img src="assets/images/gallery-7.jpg" alt="Вечерний образ" loading="lazy" /></div>
         <div class="gallery__slide"><img src="assets/images/gallery-8.jpg" alt="Маникюр" loading="lazy" /></div>
-        <div class="gallery__slide"><img src="assets/images/gallery-9.jpg" alt="Nail art" loading="lazy" /></div>
       </div>
     </div>
     <div class="gallery__controls">
@@ -234,6 +228,31 @@
       </button>
       <div class="gallery__dots" id="galleryDots"></div>
       <button class="gallery__btn gallery__btn--next" id="galleryNext" aria-label="Следующее фото">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- COSMETICS -->
+  <section class="products" id="косметика" aria-label="Косметика">
+    <h2 class="section-heading products__heading reveal">КОСМЕТИКА</h2>
+    <div class="gallery__viewport">
+      <div class="gallery__track" id="productsTrack">
+        <div class="gallery__slide"><img src="assets/images/space-2.jpg" alt="TOKIO Inkarami" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/space-3.jpg" alt="Advante Shampoo" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/gallery-9.jpg" alt="Уход Balmain" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/product-1.jpg" alt="COR.color активатор" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/product-2.jpg" alt="Capelli Dorati бальзам" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/product-3.jpg" alt="Capelli Dorati шампунь" loading="lazy" /></div>
+        <div class="gallery__slide"><img src="assets/images/product-4.jpg" alt="Capelli Dorati лосьон" loading="lazy" /></div>
+      </div>
+    </div>
+    <div class="gallery__controls">
+      <button class="gallery__btn gallery__btn--prev" id="productsPrev" aria-label="Предыдущее фото">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="gallery__dots" id="productsDots"></div>
+      <button class="gallery__btn gallery__btn--next" id="productsNext" aria-label="Следующее фото">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
@@ -1236,6 +1255,43 @@
       }
     });
 
+    goTo(0);
+  }());
+  </script>
+
+  <!-- PRODUCTS SLIDER -->
+  <script>
+  (function () {
+    var track = document.getElementById('productsTrack');
+    var dotsEl = document.getElementById('productsDots');
+    var prevBtn = document.getElementById('productsPrev');
+    var nextBtn = document.getElementById('productsNext');
+    if (!track) return;
+    var slides = Array.from(track.querySelectorAll('.gallery__slide'));
+    var total = slides.length;
+    var visible = 3;
+    var maxStep = total - visible;
+    var current = 0;
+    for (var d = 0; d <= maxStep; d++) {
+      var dot = document.createElement('button');
+      dot.className = 'gallery__dot';
+      dot.setAttribute('aria-label', 'Фото ' + (d + 1));
+      dot.dataset.idx = d;
+      dot.addEventListener('click', function () { goTo(parseInt(this.dataset.idx)); });
+      dotsEl.appendChild(dot);
+    }
+    function isMobile() { return window.innerWidth <= 768; }
+    function goTo(idx) {
+      if (isMobile()) return;
+      current = Math.max(0, Math.min(idx, maxStep));
+      track.style.transform = 'translateX(-' + (current * slides[0].offsetWidth) + 'px)';
+      dotsEl.querySelectorAll('.gallery__dot').forEach(function (d, i) { d.classList.toggle('active', i === current); });
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current >= maxStep;
+    }
+    prevBtn.addEventListener('click', function () { goTo(current - 1); });
+    nextBtn.addEventListener('click', function () { goTo(current + 1); });
+    window.addEventListener('resize', function () { isMobile() ? track.style.transform = '' : goTo(current); });
     goTo(0);
   }());
   </script>
