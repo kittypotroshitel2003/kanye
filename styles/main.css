@@ -3033,6 +3033,12 @@ button.nav__cta { appearance: none; -webkit-appearance: none; }
 
 .salon__card {
   flex: 0 0 calc((100% - 50px) / 3);
+  height: auto;
+  aspect-ratio: 4 / 3;
+}
+
+.salon__card img {
+  object-position: center;
 }
 
 .salon__nav {
@@ -3096,11 +3102,28 @@ button.nav__cta { appearance: none; -webkit-appearance: none; }
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 56px;
+  gap: 40px;
   padding: 120px 75px;
 }
-@media (max-width: 1100px) { .products { padding: 80px 40px; gap: 40px; } }
-@media (max-width: 768px)  { .products { padding: 60px 0 60px; gap: 32px; } .products__heading { padding: 0 24px; } }
+
+.products__subtitle {
+  font-family: var(--font-golos);
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(255, 93, 0, 0.7);
+  text-align: center;
+  max-width: 640px;
+  line-height: 1.6;
+  letter-spacing: -0.3px;
+  margin-top: -16px;
+}
+
+@media (max-width: 1100px) { .products { padding: 80px 40px; gap: 32px; } }
+@media (max-width: 768px)  {
+  .products { padding: 60px 0 60px; gap: 24px; }
+  .products__heading { padding: 0 24px; }
+  .products__subtitle { padding: 0 24px; font-size: 16px; }
+}
 
 /* ─── GALLERY SECTION ────────────────────────────────────────────────── */
 .gallery {
@@ -3281,6 +3304,8 @@ button.nav__cta { appearance: none; -webkit-appearance: none; }
   .salon__card,
   .salon__card:first-child {
     flex: 0 0 72vw;
+    height: auto;
+    aspect-ratio: 4 / 3;
     scroll-snap-align: start;
   }
 }
