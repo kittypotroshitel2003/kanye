@@ -3163,7 +3163,7 @@ button.nav__cta { appearance: none; -webkit-appearance: none; }
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  object-position: center top;
+  object-position: center;
   display: block;
   transition: transform 0.55s ease;
 }
