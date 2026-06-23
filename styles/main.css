@@ -723,21 +723,16 @@ a {
 
 .job__doll {
   width: 850px;
-  height: 943px;
   flex-shrink: 0;
   position: relative;
-  overflow: hidden;
   margin-right: -98px;
   z-index: 1;
 }
 
 .job__doll img {
-  position: absolute;
-  width: 112.94%;
-  height: 101.8%;
-  left: -12.94%;
-  top: 0;
-  object-fit: cover;
+  display: block;
+  width: 100%;
+  height: auto;
   max-width: none;
 }
 
@@ -1614,7 +1609,8 @@ a {
   .salon__card,
   .salon__card:first-child {
     flex: 0 0 58vw;
-    height: 520px;
+    height: auto;
+    aspect-ratio: 3 / 4;
     scroll-snap-align: start;
   }
 
@@ -1890,7 +1886,8 @@ a {
   .salon__card,
   .salon__card:first-child {
     flex: 0 0 68vw;
-    height: 480px;
+    height: auto;
+    aspect-ratio: 3 / 4;
     scroll-snap-align: start;
   }
   .salon__card--clone {
@@ -2259,7 +2256,8 @@ a {
   .salon__card,
   .salon__card:first-child {
     flex: 0 0 78vw;
-    height: 440px;
+    height: auto;
+    aspect-ratio: 3 / 4;
     scroll-snap-align: start;
   }
   .salon__card--clone {
@@ -2690,7 +2688,7 @@ button.nav__cta { appearance: none; -webkit-appearance: none; }
   padding: 18px 0; transition: border-color 0.2s;
 }
 .popup__input-row:focus-within { border-bottom-color: var(--color-orange); }
-.popup__input-row.error { border-bottom-color: #ff2200; }
+.popup__input-row.error { border-bottom-color: #ff2200; animation: errorShake 0.38s ease; }
 .popup__input {
   width: 100%; background: transparent; border: none; outline: none;
   font-family: var(--font-golos); font-weight: 500; font-size: 20px;
@@ -2908,6 +2906,7 @@ button.nav__cta { appearance: none; -webkit-appearance: none; }
 /* === JOB FORM ERRORS === */
 .job__input-row.error {
   border-bottom-color: #ff3b1e;
+  animation: errorShake 0.38s ease;
 }
 .job__error {
   display: block;
@@ -2925,6 +2924,14 @@ button.nav__cta { appearance: none; -webkit-appearance: none; }
 .job__input-row.error .job__error {
   opacity: 1;
   transform: translateY(0);
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-7px); }
+  40%       { transform: translateX(7px); }
+  60%       { transform: translateX(-4px); }
+  80%       { transform: translateX(4px); }
 }
 
 /* === COOKIE BAR === */
@@ -3036,7 +3043,7 @@ button.nav__cta { appearance: none; -webkit-appearance: none; }
 .salon__card {
   flex: 0 0 calc((100% - 50px) / 3);
   height: auto;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 4;
 }
 
 .salon__card img {
@@ -3311,7 +3318,7 @@ button.nav__cta { appearance: none; -webkit-appearance: none; }
   .salon__card:first-child {
     flex: 0 0 72vw;
     height: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 3 / 4;
     scroll-snap-align: start;
   }
 }

@@ -602,6 +602,28 @@
       $id('step1Next').disabled = false;
     };
 
+    function showBookingError(row, err, msg) {
+      if (row) { row.classList.remove('error'); void row.offsetWidth; row.classList.add('error'); }
+      if (err) err.textContent = msg;
+    }
+    function clearBookingError(row, err) {
+      if (row) row.classList.remove('error');
+      if (err) err.textContent = '';
+    }
+    function validateBookingPhone(phoneEl, phoneRow, phoneErr) {
+      var digits = phoneEl.value.replace(/\D/g, '');
+      if (!phoneEl.value.trim()) {
+        showBookingError(phoneRow, phoneErr, 'введи номер телефона');
+        return false;
+      } else if (digits.length < 10 || digits.length > 12) {
+        showBookingError(phoneRow, phoneErr, 'введи корректный номер');
+        return false;
+      } else {
+        clearBookingError(phoneRow, phoneErr);
+        return true;
+      }
+    }
+
     window.submitBooking = function () {
       var nameEl = $id('bookingName');
       var phoneEl = $id('bookingPhone');
@@ -610,33 +632,18 @@
       var nameRow = $id('bookingNameRow');
       var nameErr = $id('bookingNameError');
       if (!nameEl.value.trim()) {
-        if (nameRow) nameRow.classList.add('error');
-        if (nameErr) nameErr.textContent = 'введи своё имя';
+        showBookingError(nameRow, nameErr, 'введи своё имя');
         valid = false;
       } else if (nameEl.value.trim().length < 2) {
-        if (nameRow) nameRow.classList.add('error');
-        if (nameErr) nameErr.textContent = 'имя слишком короткое';
+        showBookingError(nameRow, nameErr, 'имя слишком короткое');
         valid = false;
       } else {
-        if (nameRow) nameRow.classList.remove('error');
-        if (nameErr) nameErr.textContent = '';
+        clearBookingError(nameRow, nameErr);
       }
 
       var phoneRow = $id('bookingPhoneRow');
       var phoneErr = $id('bookingPhoneError');
-      var phoneDigits = phoneEl.value.replace(/\D/g, '');
-      if (!phoneEl.value.trim()) {
-        if (phoneRow) phoneRow.classList.add('error');
-        if (phoneErr) phoneErr.textContent = 'введи номер телефона';
-        valid = false;
-      } else if (phoneDigits.length < 10) {
-        if (phoneRow) phoneRow.classList.add('error');
-        if (phoneErr) phoneErr.textContent = 'введи корректный номер';
-        valid = false;
-      } else {
-        if (phoneRow) phoneRow.classList.remove('error');
-        if (phoneErr) phoneErr.textContent = '';
-      }
+      if (!validateBookingPhone(phoneEl, phoneRow, phoneErr)) valid = false;
 
       if (!valid) return;
 
@@ -667,10 +674,16 @@
         var row = $id('bookingNameRow'); if (row) row.classList.remove('error');
         var err = $id('bookingNameError'); if (err) err.textContent = '';
       });
-      if (bookingPhoneEl) bookingPhoneEl.addEventListener('input', function () {
-        var row = $id('bookingPhoneRow'); if (row) row.classList.remove('error');
-        var err = $id('bookingPhoneError'); if (err) err.textContent = '';
-      });
+      if (bookingPhoneEl) {
+        bookingPhoneEl.addEventListener('input', function () {
+          clearBookingError($id('bookingPhoneRow'), $id('bookingPhoneError'));
+        });
+        bookingPhoneEl.addEventListener('blur', function () {
+          if (bookingPhoneEl.value.trim()) {
+            validateBookingPhone(bookingPhoneEl, $id('bookingPhoneRow'), $id('bookingPhoneError'));
+          }
+        });
+      }
 
       var navBtn = $id('navBookingBtn');
       if (navBtn) navBtn.addEventListener('click', openPopup);
@@ -762,13 +775,24 @@
           var err = $id(errId); if (err) err.textContent = '';
         }
         function showJobError(rowId, errId, msg) {
-          var row = $id(rowId); if (row) row.classList.add('error');
-          var err = $id(errId); if (err) err.textContent = msg;
+          var row = $id(rowId);
+          var err = $id(errId);
+          if (row) { row.classList.remove('error'); void row.offsetWidth; row.classList.add('error'); }
+          if (err) err.textContent = msg;
         }
 
         if (jobNameEl) jobNameEl.addEventListener('input', function () { clearJobError('jobNameRow', 'jobNameError'); });
         if (jobEmailEl) jobEmailEl.addEventListener('input', function () { clearJobError('jobEmailRow', 'jobEmailError'); });
-        if (jobPhoneEl) jobPhoneEl.addEventListener('input', function () { clearJobError('jobPhoneRow', 'jobPhoneError'); });
+        if (jobPhoneEl) {
+          jobPhoneEl.addEventListener('input', function () { clearJobError('jobPhoneRow', 'jobPhoneError'); });
+          jobPhoneEl.addEventListener('blur', function () {
+            if (jobPhoneEl.value.trim()) {
+              var d = jobPhoneEl.value.replace(/\D/g, '');
+              if (d.length < 10 || d.length > 12) showJobError('jobPhoneRow', 'jobPhoneError', 'введи корректный номер');
+              else clearJobError('jobPhoneRow', 'jobPhoneError');
+            }
+          });
+        }
 
         jobForm.addEventListener('submit', function (e) {
           e.preventDefault();
