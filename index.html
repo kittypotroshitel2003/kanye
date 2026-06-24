@@ -610,12 +610,17 @@
       if (row) row.classList.remove('error');
       if (err) err.textContent = '';
     }
+    function isValidPhoneDigits(digits) {
+      if (digits.length === 0) return false;
+      if (digits[0] === '7' || digits[0] === '8') return digits.length === 11;
+      return digits.length === 10;
+    }
     function validateBookingPhone(phoneEl, phoneRow, phoneErr) {
       var digits = phoneEl.value.replace(/\D/g, '');
       if (!phoneEl.value.trim()) {
         showBookingError(phoneRow, phoneErr, 'введи номер телефона');
         return false;
-      } else if (digits.length < 10 || digits.length > 12) {
+      } else if (!isValidPhoneDigits(digits)) {
         showBookingError(phoneRow, phoneErr, 'введи корректный номер');
         return false;
       } else {
@@ -788,7 +793,7 @@
           jobPhoneEl.addEventListener('blur', function () {
             if (jobPhoneEl.value.trim()) {
               var d = jobPhoneEl.value.replace(/\D/g, '');
-              if (d.length < 10 || d.length > 12) showJobError('jobPhoneRow', 'jobPhoneError', 'введи корректный номер');
+              if (!isValidPhoneDigits(d)) showJobError('jobPhoneRow', 'jobPhoneError', 'введи корректный номер');
               else clearJobError('jobPhoneRow', 'jobPhoneError');
             }
           });
@@ -823,7 +828,7 @@
           if (!jobPhoneEl || !jobPhoneEl.value.trim()) {
             showJobError('jobPhoneRow', 'jobPhoneError', 'введи свой номер');
             valid = false;
-          } else if (jobPhoneDigits.length < 10) {
+          } else if (!isValidPhoneDigits(jobPhoneDigits)) {
             showJobError('jobPhoneRow', 'jobPhoneError', 'введи корректный номер');
             valid = false;
           } else {
